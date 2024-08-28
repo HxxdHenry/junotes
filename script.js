@@ -2,13 +2,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const menuButton = document.getElementById('menu-button');
     const menuContent = document.getElementById('menu-content');
     const overlay = document.getElementById('overlay');
-    const submitButton = document.getElementById('submit-button');
     const previousButton = document.querySelector('.nav-button.previous');
     const nextButton = document.querySelector('.nav-button.next');
 
     let currentStep = 'stream';
 
-    // Define the options for each stream and year
+    // Define options for each stream and year
     const streamOptions = {
         'btech-cse': {
             '1': ['mathematics'],
@@ -21,8 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Show or hide menu
-    menuButton.addEventListener('click', (e) => {
-        e.stopPropagation();
+    menuButton.addEventListener('click', () => {
         menuContent.style.display = 'block';
         overlay.style.display = 'block';
         updateMenu();
@@ -34,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
         overlay.style.display = 'none';
     });
 
-    // Update menu based on current step
+    // Update menu based on the current step
     function updateMenu() {
         const steps = ['stream', 'year', 'subject', 'type'];
         steps.forEach(step => {
@@ -44,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
         previousButton.style.display = (currentStep === 'stream') ? 'none' : 'inline-block';
         nextButton.textContent = (currentStep === 'type') ? 'Submit' : 'Next';
 
+        // Only update relevant dropdowns
         if (currentStep === 'year') {
             updateSubjectOptions();
         } else if (currentStep === 'subject') {
@@ -57,9 +56,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const year = document.getElementById('year').value;
         const subjectSelect = document.getElementById('subject');
 
-        while (subjectSelect.firstChild) {
-            subjectSelect.removeChild(subjectSelect.firstChild);
-        }
+        console.log(`Updating subjects for: {stream: '${stream}', year: '${year}'}`);
+
+        // Clear existing options
+        subjectSelect.innerHTML = '<option value="">Select Subject</option>';
 
         if (stream && year && streamOptions[stream] && streamOptions[stream][year]) {
             const subjects = streamOptions[stream][year];
@@ -69,8 +69,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 option.textContent = subject.charAt(0).toUpperCase() + subject.slice(1);
                 subjectSelect.appendChild(option);
             });
+        } else {
+            console.log('No subjects available.');
         }
-        updateMenu();
+
+        // Call updateTypeOptions only if the subject dropdown has been populated
+        if (subjectSelect.children.length > 1) {
+            updateTypeOptions();
+        }
     }
 
     // Update type options based on selected subject
@@ -78,9 +84,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const subject = document.getElementById('subject').value;
         const typeSelect = document.getElementById('type');
 
-        while (typeSelect.firstChild) {
-            typeSelect.removeChild(typeSelect.firstChild);
-        }
+        console.log(`Updating types for subject: '${subject}'`);
+
+        // Clear existing options
+        typeSelect.innerHTML = '<option value="">Select Type</option>';
 
         if (subject && subjectOptions[subject]) {
             const types = subjectOptions[subject];
@@ -90,8 +97,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 option.textContent = type.charAt(0).toUpperCase() + type.slice(1);
                 typeSelect.appendChild(option);
             });
+        } else {
+            console.log('No types available.');
         }
-        updateMenu();
     }
 
     // Handle navigation between steps
@@ -103,7 +111,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const type = document.getElementById('type').value;
 
             if (stream && year && subject && type) {
-                // Ensure the URL structure includes the stream
                 const url = `/${stream}/${year}/${subject}/${type}.html`; // Adjust URL structure as needed
                 window.location.href = url;
             } else {
@@ -125,6 +132,25 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentIndex > 0) {
             currentStep = steps[currentIndex - 1];
             updateMenu();
+        }
+    });
+
+    // Event listeners for dropdown changes
+    document.getElementById('stream').addEventListener('change', () => {
+        if (currentStep === 'stream') {
+            updateMenu();
+        }
+    });
+
+    document.getElementById('year').addEventListener('change', () => {
+        if (currentStep === 'year') {
+            updateSubjectOptions();
+        }
+    });
+
+    document.getElementById('subject').addEventListener('change', () => {
+        if (currentStep === 'subject') {
+            updateTypeOptions();
         }
     });
 
