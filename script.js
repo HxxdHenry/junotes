@@ -11,14 +11,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Define the options for each stream and year
     const streamOptions = {
         'btech-cse': {
-            '1': ['mathematics'], // Options for BTech CSE
+            '1': ['mathematics'],
         },
     };
 
     // Define types available for each subject
     const subjectOptions = {
         'mathematics': ['notes', 'assignments'],
-        // Add other subjects here if needed
     };
 
     // Show or hide menu
@@ -70,10 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 option.textContent = subject.charAt(0).toUpperCase() + subject.slice(1);
                 subjectSelect.appendChild(option);
             });
-        } else {
-            subjectSelect.innerHTML = '<option value="">Select Subject</option>';
         }
-        
         updateMenu();
     }
 
@@ -94,9 +90,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 option.textContent = type.charAt(0).toUpperCase() + type.slice(1);
                 typeSelect.appendChild(option);
             });
-        } else {
-            typeSelect.innerHTML = '<option value="">Select Type</option>';
         }
+        updateMenu();
     }
 
     // Handle navigation between steps
@@ -108,7 +103,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const type = document.getElementById('type').value;
 
             if (stream && year && subject && type) {
-                const url = `/${year}/${subject}/${type}.html`; // Adjust URL structure as needed
+                // Ensure the URL structure includes the stream
+                const url = `/${stream}/${year}/${subject}/${type}.html`; // Adjust URL structure as needed
                 window.location.href = url;
             } else {
                 alert('Please select all options.');
