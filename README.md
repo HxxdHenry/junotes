@@ -1,1 +1,1 @@
-# junotes.github.io
+# junotes
