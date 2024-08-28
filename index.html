@@ -1,43 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JU Notes</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <header>
-        <img src="https://cdn-eu.aglty.io/sunstoneuniversity/Attachments/NewItems/Jaipur%20Engineering%20College%20and%20Research%20Centre%20Logo_20220511141341_0.png" alt="University Logo" class="logo">
+        <img src="https://cdn-eu.aglty.io/sunstoneuniversity/Attachments/NewItems/Jaipur%20Engineering%20College%20and%20Research%20Centre%20Logo_20220511141341_0.png"
+            alt="University Logo" class="logo">
         <h1>JU Notes</h1>
-        <button id="about-button" class="header-button">About Me</button>
+        <button id="menu-button" class="header-button">Show Options</button>
     </header>
-    
-    <div class="dropdown">
-        <button id="dropdown-button" class="dropdown-button">Show Options</button>
-        <div id="dropdown-content" class="dropdown-content">
-            <select id="subject" class="dropdown-item">
-                <option value="">Select Subject</option>
-                <option value="math">Mathematics</option>
-                <option value="physics">Physics</option>
-                <!-- Add more subjects as needed -->
+
+    <div id="menu-content" class="menu-content">
+        <div id="menu-stream" class="menu-step show">
+            <h2>Stream</h2>
+            <select id="stream" class="menu-select">
+                <option value="">Select Stream</option>
+                <option value="btech-cse">BTech CSE</option>
+                <option value="bba">BBA</option>
             </select>
-            <select id="year" class="dropdown-item">
+        </div>
+        <div id="menu-year" class="menu-step">
+            <h2>Year</h2>
+            <select id="year" class="menu-select">
                 <option value="">Select Year</option>
                 <option value="1">1st Year</option>
                 <option value="2">2nd Year</option>
-                <!-- Add more years as needed -->
             </select>
-            <select id="type" class="dropdown-item">
-                <option value="">Select Type</option>
-                <option value="notes">Notes</option>
-                <option value="assignments">Assignments</option>
-                <!-- Add more types as needed -->
-            </select>
-            <button id="submit-button" class="submit-button">Go</button>
         </div>
+        <div id="menu-subject" class="menu-step">
+            <h2>Subject</h2>
+            <select id="subject" class="menu-select">
+                <!-- Options will be populated based on the stream and year -->
+            </select>
+        </div>
+        <div id="menu-type" class="menu-step">
+            <h2>Type</h2>
+            <select id="type" class="menu-select">
+                <!-- Options will be populated based on the subject -->
+            </select>
+        </div>
+        <button class="nav-button previous">Previous</button>
+        <button class="nav-button next">Next</button>
+        <button id="submit-button" class="submit-button">Submit</button>
     </div>
+
+    <div id="overlay" class="overlay"></div>
 
     <script src="script.js"></script>
 </body>
+
 </html>
