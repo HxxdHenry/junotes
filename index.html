@@ -3,20 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Dropdown Menu</title>
+    <title>JU Notes</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <header>
+        <img src="https://cdn-eu.aglty.io/sunstoneuniversity/Attachments/NewItems/Jaipur%20Engineering%20College%20and%20Research%20Centre%20Logo_20220511141341_0.png" alt="University Logo" class="logo">
+        <h1>JU Notes</h1>
+    </header>
+    
     <div class="dropdown">
-        <button class="dropdown-button">Menu</button>
+        <button class="dropdown-button">Select Options</button>
         <div class="dropdown-content">
-            <a href="#home">Home</a>
-            <a href="#services">Services</a>
-            <a href="#contact">Contact</a>
+            <select id="subject" class="dropdown-item">
+                <option value="">Select Subject</option>
+                <option value="math">Mathematics</option>
+                <option value="physics">Physics</option>
+                <!-- Add more subjects as needed -->
+            </select>
+            <select id="year" class="dropdown-item">
+                <option value="">Select Year</option>
+                <option value="1">1st Year</option>
+                <option value="2">2nd Year</option>
+                <!-- Add more years as needed -->
+            </select>
+            <select id="type" class="dropdown-item">
+                <option value="">Select Type</option>
+                <option value="notes">Notes</option>
+                <option value="assignments">Assignments</option>
+                <!-- Add more types as needed -->
+            </select>
         </div>
     </div>
 
     <script src="script.js"></script>
 </body>
 </html>
+
 
