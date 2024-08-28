@@ -11,25 +11,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Define the options for each stream and year
     const streamOptions = {
         'btech-cse': {
-            '1': ['mathematics', 'physics', 'chemistry'],
-            '2': ['mathematics', 'physics', 'computer-science']
+            '1': ['mathematics'], // Options for BTech CSE
         },
-        'bba': {
-            '1': ['marketing', 'management'],
-            '2': ['finance', 'entrepreneurship']
-        }
     };
 
     // Define types available for each subject
     const subjectOptions = {
-        'mathematics': ['notes', 'assignments', 'activities'],
-        'physics': ['notes', 'assignments', 'activities'],
-        'chemistry': ['notes', 'assignments', 'activities'],
-        'computer-science': ['notes', 'assignments', 'activities'],
-        'marketing': ['notes', 'assignments', 'activities'],
-        'management': ['notes', 'assignments', 'activities'],
-        'finance': ['notes', 'assignments', 'activities'],
-        'entrepreneurship': ['notes', 'assignments', 'activities']
+        'mathematics': ['notes', 'assignments'],
+        // Add other subjects here if needed
     };
 
     // Show or hide menu
@@ -81,7 +70,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 option.textContent = subject.charAt(0).toUpperCase() + subject.slice(1);
                 subjectSelect.appendChild(option);
             });
+        } else {
+            subjectSelect.innerHTML = '<option value="">Select Subject</option>';
         }
+        
         updateMenu();
     }
 
@@ -102,8 +94,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 option.textContent = type.charAt(0).toUpperCase() + type.slice(1);
                 typeSelect.appendChild(option);
             });
+        } else {
+            typeSelect.innerHTML = '<option value="">Select Type</option>';
         }
-        updateMenu();
     }
 
     // Handle navigation between steps
