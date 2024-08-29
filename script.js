@@ -156,4 +156,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize menu
     updateMenu();
+
+    function redirectToNotes() {
+            const stream = document.getElementById('stream').value;
+            const year = document.getElementById('year').value;
+            const subject = document.getElementById('subject').value;
+            const type = document.getElementById('type').value;
+
+            // Construct the URL with query parameters
+            const url = `${stream}/${year}/${subject}/notes.html?type=${type}`;
+            window.location.href = `https://hxxdhenry.github.io/junotes/${url}`;
+        }
 });
