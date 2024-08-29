@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const overlay = document.getElementById('overlay');
     const previousButton = document.querySelector('.nav-button.previous');
     const nextButton = document.querySelector('.nav-button.next');
-    const redirectButton = document.getElementById('redirect-button'); // New
 
     let currentStep = 'stream';
 
@@ -111,10 +110,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const subject = document.getElementById('subject').value;
             const type = document.getElementById('type').value;
 
-            if (stream && year && subject && type) {
-                const url = `/${stream}/${year}/${subject}/${type}.html`; // Adjust URL structure as needed
-                window.location.href = url;
-            } else {
+            const baseUrl = 'https://hxxdhenry.github.io/junotes/';
+if (stream && year && subject && type) {
+    const url = `${baseUrl}${stream}/${year}/${subject}/${type}.html`; // Adjust base URL
+    window.location.href = url;
+}
+ else {
                 alert('Please select all options.');
             }
         } else {
@@ -153,18 +154,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentStep === 'subject') {
             updateTypeOptions();
         }
-    });
-
-    // Redirect button event listener
-    redirectButton.addEventListener('click', () => {
-        const stream = document.getElementById('stream').value;
-        const year = document.getElementById('year').value;
-        const subject = document.getElementById('subject').value;
-        const type = document.getElementById('type').value;
-
-        // Construct the URL with query parameters
-        const url = `${stream}/${year}/${subject}/notes.html?type=${type}`;
-        window.location.href = `https://hxxdhenry.github.io/junotes/${url}`;
     });
 
     // Initialize menu
