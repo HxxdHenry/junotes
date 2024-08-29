@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JU Notes</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <img src="https://cdn-eu.aglty.io/sunstoneuniversity/Attachments/NewItems/Jaipur%20Engineering%20College%20and%20Research%20Centre%20Logo_20220511141341_0.png"
+            alt="University Logo" class="logo">
+        <h1>JU Notes</h1>
+        <button id="menu-button" class="header-button">Show Options</button>
+    </header>
+
+    <div id="menu-content" class="menu-content">
+        <div id="menu-stream" class="menu-step show">
+            <h2>Stream</h2>
+            <select id="stream" class="menu-select">
+                <option value="">Select Stream</option>
+                <option value="btech-cse">BTech CSE</option>
+            </select>
+        </div>
+        <div id="menu-year" class="menu-step">
+            <h2>Year</h2>
+            <select id="year" class="menu-select">
+                <option value="">Select Year</option>
+                <option value="1">1st Year</option>
+            </select>
+        </div>
+        <div id="menu-subject" class="menu-step">
+            <h2>Subject</h2>
+            <select id="subject" class="menu-select">
+                <!-- Options will be populated based on the stream and year -->
+            </select>
+        </div>
+        <div id="menu-type" class="menu-step">
+            <h2>Type</h2>
+            <select id="type" class="menu-select">
+                <!-- Options will be populated based on the subject -->
+            </select>
+        </div>
+        <button class="nav-button previous">Previous</button>
+        <button class="nav-button next">Next</button>
+        <button id="submit-button" class="submit-button">Submit</button>
+    </div>
+
+    <div id="overlay" class="overlay"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
