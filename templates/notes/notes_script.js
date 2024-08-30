@@ -1,7 +1,7 @@
 const notes = [
-    { name: 'Presentation.pptx', url: 'https://docs.google.com/presentation/d/1aAa6quF99x-_9zUaC0LKEH5Z8FmDLAkM/edit?usp=sharing&ouid=103161207610316825981&rtpof=true&sd=true', type: 'pptx' },
-    { name: 'Document.docx', url: 'https://docs.google.com/document/d/1s0-Gxo8lJBD66CutGhexkNOd7ZRezWWd/edit?usp=sharing&ouid=103161207610316825981&rtpof=true&sd=true', type: 'docx' },
-    { name: 'Notes.pdf', url: '1.pdf', type: 'pdf' },
+    { name: '', url: '', type: 'pptx' },
+    { name: '', url: '', type: 'docx' },
+    { name: '', url: '', type: 'pdf' },
 ];
 
 function populateNotesDropdown() {

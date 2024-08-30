@@ -1,0 +1,75 @@
+/* request_styles.css */
+
+/* Base Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header {
+    background-color: #007bff;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    position: relative;
+}
+
+header h1 {
+    margin: 0;
+}
+
+.header-button {
+    background-color: #0056b3;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+main {
+    padding: 20px;
+}
+
+.telegram-preview {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.telegram-preview h2 {
+    margin-top: 0;
+}
+
+.telegram-preview iframe {
+    border: none;
+    border-radius: 20px;
+    width: 100%;
+    height: 400px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+}
+
+.telegram-preview p {
+    font-size: 16px;
+}
+
+.telegram-preview a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.telegram-preview a:hover {
+    text-decoration: underline;
+}

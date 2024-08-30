@@ -10,13 +10,28 @@ document.addEventListener('DOMContentLoaded', () => {
     // Define options for each stream and year
     const streamOptions = {
         'btech-cse': {
-            '1': ['mathematics'],
+            //Here 1 is the year
+            '1': ['DEN001A: Communication Skills + Lab', 
+                    'DMA001A: Engineering Mathematics-I', 
+                    'DCO001A: Computer Programming in C++', 
+                    'DCO02A: Computer Programming in C++ Lab', 
+                    'DIN001A: Cultural Education-I', 
+                    'DCH001A: Environmental Sciences', 
+                    'DCH002A: Engineering Chemistry', 
+                    'DCH003A: Chemistry Lab'],
         },
     };
 
     // Define types available for each subject
     const subjectOptions = {
-        'mathematics': ['notes', 'assignments'],
+        'DEN001A: Communication Skills + Lab': ['notes', 'assignments'],
+        'DMA001A: Engineering Mathematics-I': ['notes', 'assignments'],
+        'DCO001A: Computer Programming in C++': ['notes', 'assignments'],
+        'DCO02A: Computer Programming in C++ Lab': ['notes', 'assignments'],
+        'DIN001A: Cultural Education-I': ['notes', 'assignments'],
+        'DCH001A: Environmental Sciences': ['notes', 'assignments'],
+        'DCH002A: Engineering Chemistry': ['notes', 'assignments'],
+        'DCH003A: Chemistry Lab': ['Lab Manual', 'Observations'],
     };
 
     // Show or hide menu
@@ -112,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (stream && year && subject && type) {
                 // Construct the URL based on the selected options
-                const url = `${stream}/${year}/${subject}/${type}.html`; // Ensure this matches your folder structure
+                const url = `${stream}/${year}/${subject}/${type}/${type}.html`; // Ensure this matches your folder structure
                 window.location.href = url;
             } else {
                 alert('Please select all options.');
@@ -157,4 +172,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize menu
     updateMenu();
+
+    document.getElementById('request-button').addEventListener('click', function() {
+    window.location.href = 'request.html';
+});
 });
