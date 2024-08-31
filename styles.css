@@ -2,48 +2,80 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background: url('https://images.shiksha.com/mediadata/images/1611837473phpHm8M7k.jpeg') no-repeat center center fixed;
+    background: url('uni_bg.jpeg') no-repeat center center fixed;
     background-size: cover;
 }
 
 header {
-    background-color: #f4f4f4;
-    padding: 20px 20px;
-    /* Increased padding to ensure sufficient space */
+    position: relative;
+    height: 80px;
+    /* Adjust based on your header height */
+    padding: 0 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    /* Center content horizontally */
-    border-bottom: 2px solid #ddd;
-    position: relative;
-    /* To position logo absolutely */
+    border-bottom: none;
+    /* Remove bottom border */
+    overflow: hidden;
+    /* Ensure no overflow of the background */
+}
+
+header .background-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('uni_bg.jpeg') no-repeat center center;
+    background-size: cover;
+    filter: blur(15px);
+    /* Increase blur intensity */
+    z-index: -1;
+    /* Place behind the header content */
 }
 
 header .logo {
     height: 60px;
-    vertical-align: middle;
     position: absolute;
     left: 20px;
-    /* Position logo to the left */
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    /* Ensure logo is on top */
 }
 
 header h1 {
     margin: 0;
-    font-size: 30px;
-    color: #333;
+    font-size: 36px;
+    /* Increase font size */
+    color: white;
+    /* Change text color to white */
     text-align: center;
-    /* Center header text */
+    flex: 1;
+    z-index: 1;
+    /* Ensure text is on top */
+    text-shadow: 1px 1px 2px black, -1px -1px 2px black, 1px -1px 2px black, -1px 1px 2px black;
+    /* Reduced black stroke effect */
+}
+
+header .header-image {
+    height: 60px;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    /* Ensure image is on top */
 }
 
 main {
     text-align: center;
-    /* Center-align the content in the main section */
     margin-top: 20px;
-    /* Space below the header */
 }
 
 .header-button {
-    background-color: #4CAF50;
+    background-color: #007bff;
+    /* Primary blue color */
     color: white;
     border: none;
     padding: 10px 20px;
@@ -51,45 +83,33 @@ main {
     cursor: pointer;
     border-radius: 4px;
     text-decoration: none;
-    /* Remove underline */
     display: block;
-    /* Ensure buttons are block-level for vertical stacking */
     margin: 10px auto;
-    /* Center the buttons and add space between them */
     width: 300px;
-    /* Set a fixed width for consistency */
     box-sizing: border-box;
-    /* Include padding and border in element's total width and height */
     text-align: center;
-    /* Center the text within the button */
 }
 
-.header-button .line-one {
+.header-button .line-one,
+.header-button .line-two {
     display: block;
-    /* Display as a block element for line break */
 }
 
 .header-button .line-two {
-    display: block;
-    /* Display as a block element for line break */
     margin-top: 5px;
-    /* Optional: Add space between lines if needed */
 }
 
 .header-button:hover {
-    background-color: #45a049;
+    background-color: #0056b3;
+    /* Darker blue for hover effect */
 }
 
 .menu-content {
     display: none;
-    /* Hide the menu initially */
     position: fixed;
     top: 50%;
-    /* Center vertically */
     left: 50%;
-    /* Center horizontally */
     transform: translate(-50%, -50%);
-    /* Adjust position */
     background-color: #fff;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
@@ -117,7 +137,8 @@ main {
 }
 
 .nav-button {
-    background-color: #4CAF50;
+    background-color: #28a745;
+    /* Green color */
     color: white;
     border: none;
     padding: 10px 20px;
@@ -128,11 +149,13 @@ main {
 }
 
 .nav-button:hover {
-    background-color: #45a049;
+    background-color: #218838;
+    /* Darker green for hover effect */
 }
 
 .submit-button {
-    background-color: #4CAF50;
+    background-color: #17a2b8;
+    /* Teal color */
     color: white;
     padding: 10px 20px;
     font-size: 16px;
@@ -144,7 +167,8 @@ main {
 }
 
 .submit-button:hover {
-    background-color: #45a049;
+    background-color: #138496;
+    /* Darker teal for hover effect */
 }
 
 .overlay {
@@ -172,3 +196,31 @@ main {
     width: 100%;
     height: 500px;
 }
+
+.menu-step #menu-section {
+    display: block;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+    header {
+        height: auto;
+        padding: 0 10px;
+    }
+
+    header .logo,
+    header .header-image {
+        height: 50px;
+        left: 10px;
+        right: 10px;
+    }
+
+    .header-button {
+        width: 90%;
+    }
+
+    .menu-content {
+        width: 90%;
+        max-width: none;
+    }
+}   

@@ -7,31 +7,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let currentStep = 'stream';
 
-    // Define options for each stream and year
+    // Define options for each stream, year, and section
     const streamOptions = {
         'btech-cse': {
-            //Here 1 is the year
-            '1': ['DEN001A: Communication Skills + Lab', 
-                    'DMA001A: Engineering Mathematics-I', 
-                    'DCO001A: Computer Programming in C++', 
-                    'DCO02A: Computer Programming in C++ Lab', 
-                    'DIN001A: Cultural Education-I', 
-                    'DCH001A: Environmental Sciences', 
-                    'DCH002A: Engineering Chemistry', 
-                    'DCH003A: Chemistry Lab'],
+            '1': {
+                'M': [
+                    'DEN001A Communication Skills + Lab', 
+                    'DMA001A Engineering Mathematics-I', 
+                    'DCO001A Computer Programming in C++', 
+                    'DCO02A Computer Programming in C++ Lab', 
+                    'DIN001A Cultural Education-I', 
+                    'DCH001A Environmental Sciences', 
+                    'DCH002A Engineering Chemistry', 
+                    'DCH003A Chemistry Lab'
+                ],
+            },
         },
     };
 
     // Define types available for each subject
     const subjectOptions = {
-        'DEN001A: Communication Skills + Lab': ['notes', 'assignments'],
-        'DMA001A: Engineering Mathematics-I': ['notes', 'assignments'],
-        'DCO001A: Computer Programming in C++': ['notes', 'assignments'],
-        'DCO02A: Computer Programming in C++ Lab': ['notes', 'assignments'],
-        'DIN001A: Cultural Education-I': ['notes', 'assignments'],
-        'DCH001A: Environmental Sciences': ['notes', 'assignments'],
-        'DCH002A: Engineering Chemistry': ['notes', 'assignments'],
-        'DCH003A: Chemistry Lab': ['Lab Manual', 'Observations'],
+        'DEN001A Communication Skills + Lab': ['notes', 'assignments'],
+        'DMA001A Engineering Mathematics-I': ['notes', 'assignments'],
+        'DCO001A Computer Programming in C++': ['notes', 'assignments'],
+        'DCO02A Computer Programming in C++ Lab': ['notes', 'assignments'],
+        'DIN001A Cultural Education-I': ['notes', 'assignments'],
+        'DCH001A Environmental Sciences': ['notes', 'assignments'],
+        'DCH002A Engineering Chemistry': ['notes', 'assignments', 'books'],
+        'DCH003A Chemistry Lab': ['Lab Manual', 'Observations'],
     };
 
     // Show or hide menu
@@ -49,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Update menu based on the current step
     function updateMenu() {
-        const steps = ['stream', 'year', 'subject', 'type'];
+        const steps = ['stream', 'year', 'section', 'subject', 'type'];
         steps.forEach(step => {
             document.getElementById(`menu-${step}`).classList.toggle('show', step === currentStep);
         });
@@ -59,25 +62,57 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Only update relevant dropdowns
         if (currentStep === 'year') {
+            updateSectionOptions();
+        } else if (currentStep === 'section') {
             updateSubjectOptions();
         } else if (currentStep === 'subject') {
             updateTypeOptions();
         }
     }
 
-    // Update subject options based on selected stream and year
+    // Update section options based on selected stream and year
+    function updateSectionOptions() {
+        const stream = document.getElementById('stream').value;
+        const year = document.getElementById('year').value;
+        const sectionSelect = document.getElementById('section');
+
+        console.log(`Updating sections for: {stream: '${stream}', year: '${year}'}`);
+
+        // Clear existing options
+        sectionSelect.innerHTML = '<option value="">Select Section</option>';
+
+        if (stream && year && streamOptions[stream] && streamOptions[stream][year]) {
+            const sections = Object.keys(streamOptions[stream][year]);
+            sections.forEach(section => {
+                const option = document.createElement('option');
+                option.value = section;
+                option.textContent = section;
+                sectionSelect.appendChild(option);
+            });
+        } else {
+            console.log('No sections available.');
+        }
+
+        // Call updateSubjectOptions only if the section dropdown has been populated
+        if (sectionSelect.children.length > 1) {
+            updateSubjectOptions();
+        }
+    }
+
+    // Update subject options based on selected stream, year, and section
     function updateSubjectOptions() {
         const stream = document.getElementById('stream').value;
         const year = document.getElementById('year').value;
+        const section = document.getElementById('section').value;
         const subjectSelect = document.getElementById('subject');
 
-        console.log(`Updating subjects for: {stream: '${stream}', year: '${year}'}`);
+        console.log(`Updating subjects for: {stream: '${stream}', year: '${year}', section: '${section}'}`);
 
         // Clear existing options
         subjectSelect.innerHTML = '<option value="">Select Subject</option>';
 
-        if (stream && year && streamOptions[stream] && streamOptions[stream][year]) {
-            const subjects = streamOptions[stream][year];
+        if (stream && year && section && streamOptions[stream] && streamOptions[stream][year] && streamOptions[stream][year][section]) {
+            const subjects = streamOptions[stream][year][section];
             subjects.forEach(subject => {
                 const option = document.createElement('option');
                 option.value = subject;
@@ -122,18 +157,19 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentStep === 'type') {
             const stream = document.getElementById('stream').value;
             const year = document.getElementById('year').value;
+            const section = document.getElementById('section').value;
             const subject = document.getElementById('subject').value;
             const type = document.getElementById('type').value;
 
-            if (stream && year && subject && type) {
+            if (stream && year && section && subject && type) {
                 // Construct the URL based on the selected options
-                const url = `${stream}/${year}/${subject}/${type}/${type}.html`; // Ensure this matches your folder structure
+                const url = `${stream}/${year}/${section}/${subject}/${type}/${type}.html`; // Ensure this matches your folder structure
                 window.location.href = url;
             } else {
                 alert('Please select all options.');
             }
         } else {
-            const steps = ['stream', 'year', 'subject', 'type'];
+            const steps = ['stream', 'year', 'section', 'subject', 'type'];
             const currentIndex = steps.indexOf(currentStep);
             if (currentIndex >= 0 && currentIndex < steps.length - 1) {
                 currentStep = steps[currentIndex + 1];
@@ -143,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     previousButton.addEventListener('click', () => {
-        const steps = ['stream', 'year', 'subject', 'type'];
+        const steps = ['stream', 'year', 'section', 'subject', 'type'];
         const currentIndex = steps.indexOf(currentStep);
         if (currentIndex > 0) {
             currentStep = steps[currentIndex - 1];
@@ -160,6 +196,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('year').addEventListener('change', () => {
         if (currentStep === 'year') {
+            updateSectionOptions();
+        }
+    });
+
+    document.getElementById('section').addEventListener('change', () => {
+        if (currentStep === 'section') {
             updateSubjectOptions();
         }
     });
@@ -174,6 +216,6 @@ document.addEventListener('DOMContentLoaded', () => {
     updateMenu();
 
     document.getElementById('request-button').addEventListener('click', function() {
-    window.location.href = 'request.html';
-});
+        window.location.href = 'request.html';
+    });
 });

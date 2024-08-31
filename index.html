@@ -4,24 +4,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JU Hub</title>
+    <title>ACADEMIX - JU</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
 </head>
 
 <body>
     <header>
+        <img src="academix.png" alt="Academix Logo" class="logo">
+        <h1>ACADEMIX - JU</h1>
         <img src="logo.png"
-            alt="University Logo" class="logo">
-        <h1>JU Hub</h1>
+            alt="University Logo" class="header-image">
     </header>
 
     <main>
         <button id="menu-button" class="header-button">Show Options</button>
-        <a href="request.html" id="request-button" class="header-button">
-            <span class="line-one">Not what you're looking for?</span>
-            <span class="line-two">Request Content</span>
-        </a>
         <a href="https://jecrc.mastersofterp.in/" id="erp-button" class="header-button">ERP</a>
+        <a href="out_of_service.html" id="request-button" class="header-button">
+            <span class="line-one">Request Content</span>
+        </a>
+        <a href="out_of_service.html" id="request-button" class="header-button">
+            <span class="line-one">Suggestions</span>
+        </a>
 
 
     <div id="menu-content" class="menu-content">
@@ -37,6 +44,14 @@
             <select id="year" class="menu-select">
                 <option value="">Select Year</option>
                 <option value="1">1st Year</option>
+            </select>
+        </div>
+        <div id="menu-section" class="menu-step">
+            <h2>Section</h2>
+            <select id="section" class="menu-select">
+                <option value="">Select Section</option>
+                <option value="M">M</option>
+                <!-- Add more sections if needed -->
             </select>
         </div>
         <div id="menu-subject" class="menu-step">

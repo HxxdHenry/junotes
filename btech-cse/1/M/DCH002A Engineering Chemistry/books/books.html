@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books</title>
+    <link rel="stylesheet" href="books_styles.css">
+</head>
+
+<body>
+    <h1>View and Download Books</h1>
+
+    <!-- Dropdown for selecting books -->
+    <label for="booksDropdown">Select a File:</label>
+    <select id="booksDropdown">
+        <option value="">--Select a File--</option>
+        <!-- Options will be populated dynamically -->
+    </select>
+
+    <!-- Iframe or Embed to display the selected file -->
+    <div id="fileViewerContainer">
+        <iframe id="fileViewer" style="display:none; width:95%; height:500px;" frameborder="0"></iframe>
+    </div>
+
+    <script src="books_script.js"></script>
+</body>
+
+</html>
