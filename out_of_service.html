@@ -7,7 +7,7 @@
     <title>Maintenance Page</title>
     <style>
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-family: Arial, sans-serif;
             background-color: #f5f5f7;
             display: flex;
             flex-direction: column;
@@ -17,65 +17,42 @@
             margin: 0;
             text-align: center;
             color: #333;
-            overflow: auto;
         }
 
         .container {
-            max-width: 1000px;
             width: 90%;
-            padding: 20px;
-            box-sizing: border-box;
+            max-width: 400px;
+            /* Adjusted for smaller container */
         }
 
         h1 {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            font-size: 48px;
-            /* Adjusted for responsive design */
-            margin: 15px 0 0px 0;
+            font-size: 2rem;
             color: #000;
-            font-weight: 400;
         }
 
         p {
-            font-size: 18px;
-            /* Adjusted for readability on smaller screens */
+            font-size: 1rem;
             color: #555;
-            margin: 0px 0;
-            /* Consistent margin between paragraphs */
         }
 
-        iframe {
-            border: none;
-            margin-top: 20px;
-            width: 100%;
-            height: 80vh;
-            /* Adjusted to fit most screens */
-            border-radius: 12px;
+        #score {
+            font-size: 1.5rem;
+            color: #000;
+            margin-bottom: 10px;
+            /* Space between score and canvas */
+        }
+
+        canvas {
+            border: 2px solid #000;
+            background-color: #fff;
+            display: block;
+            margin: 20px auto;
+            border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-            max-height: 500px;
-            /* Ensures the game fits well */
-        }
-
-        /* Media Queries for Responsive Design */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 36px;
-                /* Smaller font size for smaller screens */
-                margin: 20px 0 10px 0;
-            }
-
-            p {
-                font-size: 16px;
-                /* Adjust font size for readability on smaller screens */
-            }
-
-            iframe {
-                height: 60vh;
-                /* Adjust iframe height for smaller screens */
-                max-height: 400px;
-                /* Limit maximum height on smaller screens */
-            }
+            width: 100%;
+            /* Responsive width */
+            height: 300px;
+            /* Fixed height for the smaller canvas */
         }
     </style>
 </head>
@@ -84,9 +61,145 @@
     <div class="container">
         <h1>We’ll be back soon...</h1>
         <p>We're currently updating our website for you.</p>
-        <p>In the meantime, enjoy!</p>
-        <!-- Embed the Pac-Man game using an iframe -->
-        <iframe src="pacman.html" title="Pac-Man Game" allowfullscreen></iframe>
+        <p>In the meantime, enjoy the game!</p>
+        <!-- Score display -->
+        <div id="score">Score: 0</div>
+        <!-- Snake game embedded directly into the page -->
+        <canvas id="snakeGame"></canvas>
+        <script>
+            const canvas = document.getElementById('snakeGame');
+            const ctx = canvas.getContext('2d');
+            const box = 20; // Size of each block
+            let snake = [{ x: 2 * box, y: 2 * box }]; // Initial snake position
+            let food = generateFood(); // Initial food position
+            let d = ''; // Direction
+            let score = 0;
+            let gameInterval;
+            let speed = 300; // Initial speed (milliseconds)
+            let speedIncreaseInterval = 5000; // Increase speed every 5 seconds
+            let lastIncreaseTime = Date.now();
+            let gameRunning = true; // Track game status
+
+            // Adjust canvas size and reset game
+            function resizeCanvas() {
+                canvas.width = canvas.clientWidth; // Set width based on CSS
+                canvas.height = canvas.clientHeight; // Set height based on CSS
+                food = generateFood(); // Reset food position
+                if (gameRunning) {
+                    draw(); // Redraw game if running
+                }
+            }
+
+            function generateFood() {
+                // Generate food position within bounds
+                return {
+                    x: Math.floor(Math.random() * Math.floor(canvas.width / box)) * box,
+                    y: Math.floor(Math.random() * Math.floor(canvas.height / box)) * box
+                };
+            }
+
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'ArrowLeft' && d !== 'RIGHT') d = 'LEFT';
+                if (event.key === 'ArrowUp' && d !== 'DOWN') d = 'UP';
+                if (event.key === 'ArrowRight' && d !== 'LEFT') d = 'RIGHT';
+                if (event.key === 'ArrowDown' && d !== 'UP') d = 'DOWN';
+            });
+
+            document.addEventListener('touchstart', (event) => {
+                const touch = event.touches[0];
+                const x = touch.clientX;
+                const y = touch.clientY;
+
+                if (x < canvas.width / 3 && d !== 'RIGHT') d = 'LEFT';
+                if (y < canvas.height / 3 && d !== 'DOWN') d = 'UP';
+                if (x > canvas.width * 2 / 3 && d !== 'LEFT') d = 'RIGHT';
+                if (y > canvas.height * 2 / 3 && d !== 'UP') d = 'DOWN';
+            });
+
+            function draw() {
+                if (!gameRunning) return; // Stop drawing if the game is not running
+
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                // Draw snake
+                ctx.fillStyle = 'green';
+                for (let i = 0; i < snake.length; i++) {
+                    ctx.fillRect(snake[i].x, snake[i].y, box, box);
+                }
+
+                // Draw food
+                ctx.fillStyle = 'red';
+                ctx.fillRect(food.x, food.y, box, box);
+
+                // Move snake
+                let headX = snake[0].x;
+                let headY = snake[0].y;
+
+                if (d === 'LEFT') headX -= box;
+                if (d === 'UP') headY -= box;
+                if (d === 'RIGHT') headX += box;
+                if (d === 'DOWN') headY += box;
+
+                // Check for food collision
+                if (headX === food.x && headY === food.y) {
+                    score++;
+                    food = generateFood();
+                } else {
+                    snake.pop();
+                }
+
+                // Add new head
+                snake.unshift({ x: headX, y: headY });
+
+                // Game over conditions
+                if (headX < 0 || headX >= canvas.width || headY < 0 || headY >= canvas.height || collision(headX, headY)) {
+                    endGame();
+                    return; // Prevent further drawing after game is over
+                }
+
+                // Update score display
+                document.getElementById('score').innerText = 'Score: ' + score;
+
+                // Increase speed over time
+                let now = Date.now();
+                if (now - lastIncreaseTime > speedIncreaseInterval) {
+                    lastIncreaseTime = now;
+                    speed = Math.max(50, speed - 10); // Increase speed, with a minimum of 50ms
+                    clearInterval(gameInterval);
+                    gameInterval = setInterval(draw, speed); // Restart game with new speed
+                }
+            }
+
+            function collision(x, y) {
+                // Check if snake collides with itself
+                for (let i = 1; i < snake.length; i++) {
+                    if (x === snake[i].x && y === snake[i].y) return true;
+                }
+                return false;
+            }
+
+            function endGame() {
+                gameRunning = false; // Stop the game
+                alert('Game Over! Your score: ' + score);
+                resetGame();
+            }
+
+            function resetGame() {
+                snake = [{ x: 2 * box, y: 2 * box }];
+                d = '';
+                score = 0;
+                food = generateFood();
+                speed = 300; // Reset initial speed
+                lastIncreaseTime = Date.now();
+                gameRunning = true; // Restart game
+                gameInterval = setInterval(draw, speed); // Restart the game
+            }
+
+            gameInterval = setInterval(draw, speed); // Start the game
+        </script>
     </div>
 </body>
 
