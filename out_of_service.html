@@ -22,7 +22,6 @@
         .container {
             width: 90%;
             max-width: 400px;
-            /* Adjusted for smaller container */
         }
 
         h1 {
@@ -36,23 +35,27 @@
         }
 
         #score {
-            font-size: 1.5rem;
+            font-size: 1rem;
+            /* Smaller font size */
             color: #000;
             margin-bottom: 10px;
             /* Space between score and canvas */
+            text-align: left;
+            /* Align text to the left */
+            width: 100%;
+            position: relative;
+            /* For positioning above the canvas */
         }
 
         canvas {
             border: 2px solid #000;
             background-color: #fff;
             display: block;
-            margin: 20px auto;
+            margin: 0 auto;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             width: 100%;
-            /* Responsive width */
             height: 300px;
-            /* Fixed height for the smaller canvas */
         }
     </style>
 </head>
@@ -62,7 +65,6 @@
         <h1>We’ll be back soon...</h1>
         <p>We're currently updating our website for you.</p>
         <p>In the meantime, enjoy the game!</p>
-        <!-- Score display -->
         <div id="score">Score: 0</div>
         <!-- Snake game embedded directly into the page -->
         <canvas id="snakeGame"></canvas>
@@ -82,8 +84,8 @@
 
             // Adjust canvas size and reset game
             function resizeCanvas() {
-                canvas.width = canvas.clientWidth; // Set width based on CSS
-                canvas.height = canvas.clientHeight; // Set height based on CSS
+                canvas.width = canvas.clientWidth;
+                canvas.height = canvas.clientHeight;
                 food = generateFood(); // Reset food position
                 if (gameRunning) {
                     draw(); // Redraw game if running
@@ -91,7 +93,6 @@
             }
 
             function generateFood() {
-                // Generate food position within bounds
                 return {
                     x: Math.floor(Math.random() * Math.floor(canvas.width / box)) * box,
                     y: Math.floor(Math.random() * Math.floor(canvas.height / box)) * box
@@ -111,16 +112,15 @@
             let touchStartX = 0;
             let touchStartY = 0;
 
-            // Prevent default touch behavior on canvas
             canvas.addEventListener('touchstart', (event) => {
-                event.preventDefault(); // Prevent default touch behavior
+                event.preventDefault();
                 const touch = event.touches[0];
                 touchStartX = touch.clientX;
                 touchStartY = touch.clientY;
             });
 
             canvas.addEventListener('touchmove', (event) => {
-                event.preventDefault(); // Prevent default touch behavior
+                event.preventDefault();
                 const touch = event.touches[0];
                 const touchEndX = touch.clientX;
                 const touchEndY = touch.clientY;
@@ -128,7 +128,6 @@
                 const diffX = touchEndX - touchStartX;
                 const diffY = touchEndY - touchStartY;
 
-                // Determine swipe direction
                 if (Math.abs(diffX) > Math.abs(diffY)) {
                     if (diffX > 0 && d !== 'LEFT') d = 'RIGHT';
                     if (diffX < 0 && d !== 'RIGHT') d = 'LEFT';
@@ -139,7 +138,7 @@
             });
 
             function draw() {
-                if (!gameRunning) return; // Stop drawing if the game is not running
+                if (!gameRunning) return;
 
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -176,7 +175,7 @@
                 // Game over conditions
                 if (headX < 0 || headX >= canvas.width || headY < 0 || headY >= canvas.height || collision(headX, headY)) {
                     endGame();
-                    return; // Prevent further drawing after game is over
+                    return;
                 }
 
                 // Update score display
@@ -186,14 +185,13 @@
                 let now = Date.now();
                 if (now - lastIncreaseTime > speedIncreaseInterval) {
                     lastIncreaseTime = now;
-                    speed = Math.max(50, speed - 10); // Increase speed, with a minimum of 50ms
+                    speed = Math.max(50, speed - 10);
                     clearInterval(gameInterval);
-                    gameInterval = setInterval(draw, speed); // Restart game with new speed
+                    gameInterval = setInterval(draw, speed);
                 }
             }
 
             function collision(x, y) {
-                // Check if snake collides with itself
                 for (let i = 1; i < snake.length; i++) {
                     if (x === snake[i].x && y === snake[i].y) return true;
                 }
@@ -201,7 +199,7 @@
             }
 
             function endGame() {
-                gameRunning = false; // Stop the game
+                gameRunning = false;
                 alert('Game Over! Your score: ' + score);
                 resetGame();
             }
