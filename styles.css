@@ -215,7 +215,7 @@ main {
     }
 
     .header-button {
-        width: 100%;
+        width: 70%;
         /* Full width buttons on very small screens */
     }
 }
