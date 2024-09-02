@@ -108,15 +108,31 @@
                 if (event.key === 'ArrowDown' && d !== 'UP') d = 'DOWN';
             });
 
+            let touchStartX = 0;
+            let touchStartY = 0;
+
             document.addEventListener('touchstart', (event) => {
                 const touch = event.touches[0];
-                const x = touch.clientX;
-                const y = touch.clientY;
+                touchStartX = touch.clientX;
+                touchStartY = touch.clientY;
+            });
 
-                if (x < canvas.width / 3 && d !== 'RIGHT') d = 'LEFT';
-                if (y < canvas.height / 3 && d !== 'DOWN') d = 'UP';
-                if (x > canvas.width * 2 / 3 && d !== 'LEFT') d = 'RIGHT';
-                if (y > canvas.height * 2 / 3 && d !== 'UP') d = 'DOWN';
+            document.addEventListener('touchend', (event) => {
+                const touch = event.changedTouches[0];
+                const touchEndX = touch.clientX;
+                const touchEndY = touch.clientY;
+
+                const diffX = touchEndX - touchStartX;
+                const diffY = touchEndY - touchStartY;
+
+                // Determine swipe direction
+                if (Math.abs(diffX) > Math.abs(diffY)) {
+                    if (diffX > 0 && d !== 'LEFT') d = 'RIGHT';
+                    if (diffX < 0 && d !== 'RIGHT') d = 'LEFT';
+                } else {
+                    if (diffY > 0 && d !== 'UP') d = 'DOWN';
+                    if (diffY < 0 && d !== 'DOWN') d = 'UP';
+                }
             });
 
             function draw() {
