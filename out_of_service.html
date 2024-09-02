@@ -22,6 +22,8 @@
         .container {
             width: 90%;
             max-width: 400px;
+            position: relative;
+            /* Relative positioning to manage absolute child elements */
         }
 
         h1 {
@@ -43,8 +45,14 @@
             text-align: left;
             /* Align text to the left */
             width: 100%;
-            position: relative;
-            /* For positioning above the canvas */
+            position: absolute;
+            /* Position it above the canvas */
+            top: 0;
+            left: 0;
+            padding: 5px;
+            /* Add padding for better visibility */
+            box-sizing: border-box;
+            /* Include padding in element width/height */
         }
 
         canvas {
@@ -56,6 +64,8 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             width: 100%;
             height: 300px;
+            position: relative;
+            /* Ensure canvas is in normal flow */
         }
     </style>
 </head>
@@ -66,7 +76,6 @@
         <p>We're currently updating our website for you.</p>
         <p>In the meantime, enjoy the game!</p>
         <div id="score">Score: 0</div>
-        <!-- Snake game embedded directly into the page -->
         <canvas id="snakeGame"></canvas>
         <script>
             const canvas = document.getElementById('snakeGame');
