@@ -1,23 +1,27 @@
-const labs = [{ name: "Lab Manual", url: "Lab Manual.pdf", type: "pdf" }];
+//notes - 6
+//note - 7
+//Notes - 2
 
-function populateLabsDropdown() {
-  const dropdown = document.getElementById("labsDropdown");
-  labs.forEach((lab) => {
+const notes = [{ name: "Observations", url: "Observations.pdf", type: "pdf" }];
+
+function populateNotesDropdown() {
+  const dropdown = document.getElementById("notesDropdown");
+  notes.forEach((note) => {
     const option = document.createElement("option");
-    option.value = lab.url;
-    option.textContent = lab.name;
+    option.value = note.url;
+    option.textContent = note.name;
     dropdown.appendChild(option);
   });
 }
 
 function displaySelectedFile() {
-  const dropdown = document.getElementById("labsDropdown");
+  const dropdown = document.getElementById("notesDropdown");
   const viewer = document.getElementById("fileViewer");
   const selectedFile = dropdown.value;
 
   if (selectedFile) {
-    const lab = labs.find((lab) => lab.url === selectedFile);
-    const fileType = lab.type;
+    const note = notes.find((note) => note.url === selectedFile);
+    const fileType = note.type;
 
     viewer.style.display = "none";
 
@@ -36,8 +40,8 @@ function displaySelectedFile() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  populateLabsDropdown();
+  populateNotesDropdown();
   document
-    .getElementById("labsDropdown")
+    .getElementById("notesDropdown")
     .addEventListener("change", displaySelectedFile);
 });
