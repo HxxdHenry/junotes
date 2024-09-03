@@ -1,0 +1,32 @@
+<!-- notes - 5 -->
+<!-- Notes - 2 -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes</title>
+    <link rel="stylesheet" href="notes_styles.css">
+</head>
+
+<body>
+    <h1>View and Download Notes</h1>
+
+    <!-- Dropdown for selecting notes -->
+    <label for="notesDropdown">Select a File:</label>
+    <select id="notesDropdown">
+        <option value="">--Select a File--</option>
+        <!-- Options will be populated dynamically -->
+    </select>
+
+    <!-- Iframe or Embed to display the selected file -->
+    <div id="fileViewerContainer">
+        <iframe id="fileViewer" style="display:none; width:95%; height:500px;" frameborder="0"></iframe>
+    </div>
+
+    <script src="notes_script.js"></script>
+</body>
+
+</html>
