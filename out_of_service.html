@@ -20,9 +20,9 @@
 
         .container {
             width: 90%;
-            max-width: 90vw; /* Use viewport width for better responsiveness */
-            height: 90%; /* Adjust height as needed */
-            max-height: 90vh; /* Limit height to viewport height */
+            max-width: 90vw;
+            height: 90%;
+            max-height: 90vh;
             position: relative;
             margin: 0 auto;
             display: flex;
@@ -57,6 +57,24 @@
             border-radius: 15px; /* Rounded corners */
             border: none;
         }
+
+        .links-container {
+            margin-top: 20px;
+        }
+
+        .links-container ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .links-container li {
+            margin-bottom: 10px;
+        }
+
+        .links-container a {
+            text-decoration: none;
+            color: #007bff;
+        }
     </style>
 </head>
 <body>
@@ -67,19 +85,16 @@
         <div class="iframe-container">
             <iframe id="game-iframe" src="https://freepacman.org/" title="Free Pacman" allowfullscreen></iframe>
         </div>
+        <div class="links-container">
+            <p>Check out more games:</p>
+            <ul>
+                <li><a href="https://happyhopper.org" target="_blank">Play Frogger</a></li>
+                <li><a href="https://freepong.org" target="_blank">Play Pong</a></li>
+                <li><a href="https://freeasteroids.org" target="_blank">Play Asteroids</a></li>
+                <li><a href="https://freejetpac.org" target="_blank">Play Jetpac</a></li>
+                <li><a href="https://freekong.org" target="_blank">Play Donkey Kong</a></li>
+            </ul>
+        </div>
     </div>
-
-    <script>
-        // Function to focus on the iframe
-        function focusIframe() {
-            const iframe = document.getElementById('game-iframe');
-            if (iframe) {
-                iframe.focus();
-            }
-        }
-
-        // Focus iframe when the page loads
-        window.onload = focusIframe;
-    </script>
 </body>
 </html>
