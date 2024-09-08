@@ -4,75 +4,222 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JU</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
-    <link rel="manifest" href="favicon/site.webmanifest">
+    <title>Maintenance Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f7;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+            color: #333;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 400px;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #000;
+            margin-bottom: 0.5rem;
+            /* Small gap below the header */
+        }
+
+        p {
+            font-size: 1rem;
+            color: #555;
+            margin: 0.25rem 0;
+            /* Small gaps between paragraphs */
+        }
+
+        #score {
+            font-size: 1rem;
+            color: #000;
+            margin-bottom: 2px;
+            /* Small gap between score and canvas */
+            text-align: left;
+            width: 100%;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+
+        canvas {
+            border: 2px solid #000;
+            background-color: #fff;
+            display: block;
+            margin: 0 auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            height: 300px;
+        }
+    </style>
 </head>
 
 <body>
-    <header>
-        <img src="uni_logo.png"
-            alt="University Logo" class="header-image">
-        <h1>JU</h1>
-    </header>
+    <div class="container">
+        <h1>We’ll be back soon...</h1>
+        <p>We're currently updating our website for you.</p>
+        <p>In the meantime, enjoy the game!</p>
+        <div id="score">Score: 0</div>
+        <canvas id="snakeGame"></canvas>
+        <script>
+            const canvas = document.getElementById('snakeGame');
+            const ctx = canvas.getContext('2d');
+            const box = 20; // Size of each block
+            let snake = [{ x: 2 * box, y: 2 * box }]; // Initial snake position
+            let food = generateFood(); // Initial food position
+            let d = ''; // Direction
+            let score = 0;
+            let gameInterval;
+            let speed = 300; // Initial speed (milliseconds)
+            let speedIncreaseInterval = 5000; // Increase speed every 5 seconds
+            let lastIncreaseTime = Date.now();
+            let gameRunning = true; // Track game status
 
-    <main>
-        <button id="menu-button" class="header-button">Show Options</button>
-        <a href="https://jecrc.mastersofterp.in/" id="erp-button" class="header-button">ERP</a>
-        <a href="out_of_service.html" id="request-button" class="header-button">
-            <span class="line-one">Request Content</span>
-        </a>
-        <a href="out_of_service.html" id="request-button" class="header-button">
-            <span class="line-one">Suggestions</span>
-        </a>
+            // Adjust canvas size and reset game
+            function resizeCanvas() {
+                canvas.width = canvas.clientWidth;
+                canvas.height = canvas.clientHeight;
+                food = generateFood(); // Reset food position
+                if (gameRunning) {
+                    draw(); // Redraw game if running
+                }
+            }
 
+            function generateFood() {
+                return {
+                    x: Math.floor(Math.random() * Math.floor(canvas.width / box)) * box,
+                    y: Math.floor(Math.random() * Math.floor(canvas.height / box)) * box
+                };
+            }
 
-    <div id="menu-content" class="menu-content">
-        <div id="menu-stream" class="menu-step show">
-            <h2>Stream</h2>
-            <select id="stream" class="menu-select">
-                <option value="">Select Stream</option>
-                <option value="btech-cse">BTech CSE</option>
-            </select>
-        </div>
-        <div id="menu-year" class="menu-step">
-            <h2>Year</h2>
-            <select id="year" class="menu-select">
-                <option value="">Select Year</option>
-                <option value="1">1st Year</option>
-            </select>
-        </div>
-        <div id="menu-section" class="menu-step">
-            <h2>Section</h2>
-            <select id="section" class="menu-select">
-                <option value="">Select Section</option>
-                <option value="M">M</option>
-                <!-- Add more sections if needed -->
-            </select>
-        </div>
-        <div id="menu-subject" class="menu-step">
-            <h2>Subject</h2>
-            <select id="subject" class="menu-select">
-                <!-- Options will be populated based on the stream and year -->
-            </select>
-        </div>
-        <div id="menu-type" class="menu-step">
-            <h2>Type</h2>
-            <select id="type" class="menu-select">
-                <!-- Options will be populated based on the subject -->
-            </select>
-        </div>
-        <button class="nav-button previous">Previous</button>
-        <button class="nav-button next">Next</button>
-        <button id="submit-button" class="submit-button">Submit</button>
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'ArrowLeft' && d !== 'RIGHT') d = 'LEFT';
+                if (event.key === 'ArrowUp' && d !== 'DOWN') d = 'UP';
+                if (event.key === 'ArrowRight' && d !== 'LEFT') d = 'RIGHT';
+                if (event.key === 'ArrowDown' && d !== 'UP') d = 'DOWN';
+            });
+
+            let touchStartX = 0;
+            let touchStartY = 0;
+
+            canvas.addEventListener('touchstart', (event) => {
+                event.preventDefault();
+                const touch = event.touches[0];
+                touchStartX = touch.clientX;
+                touchStartY = touch.clientY;
+            });
+
+            canvas.addEventListener('touchmove', (event) => {
+                event.preventDefault();
+                const touch = event.touches[0];
+                const touchEndX = touch.clientX;
+                const touchEndY = touch.clientY;
+
+                const diffX = touchEndX - touchStartX;
+                const diffY = touchEndY - touchStartY;
+
+                if (Math.abs(diffX) > Math.abs(diffY)) {
+                    if (diffX > 0 && d !== 'LEFT') d = 'RIGHT';
+                    if (diffX < 0 && d !== 'RIGHT') d = 'LEFT';
+                } else {
+                    if (diffY > 0 && d !== 'UP') d = 'DOWN';
+                    if (diffY < 0 && d !== 'DOWN') d = 'UP';
+                }
+            });
+
+            function draw() {
+                if (!gameRunning) return;
+
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                // Draw snake
+                ctx.fillStyle = 'green';
+                for (let i = 0; i < snake.length; i++) {
+                    ctx.fillRect(snake[i].x, snake[i].y, box, box);
+                }
+
+                // Draw food
+                ctx.fillStyle = 'red';
+                ctx.fillRect(food.x, food.y, box, box);
+
+                // Move snake
+                let headX = snake[0].x;
+                let headY = snake[0].y;
+
+                if (d === 'LEFT') headX -= box;
+                if (d === 'UP') headY -= box;
+                if (d === 'RIGHT') headX += box;
+                if (d === 'DOWN') headY += box;
+
+                // Check for food collision
+                if (headX === food.x && headY === food.y) {
+                    score++;
+                    food = generateFood();
+                } else {
+                    snake.pop();
+                }
+
+                // Add new head
+                snake.unshift({ x: headX, y: headY });
+
+                // Game over conditions
+                if (headX < 0 || headX >= canvas.width || headY < 0 || headY >= canvas.height || collision(headX, headY)) {
+                    endGame();
+                    return;
+                }
+
+                // Update score display
+                document.getElementById('score').innerText = 'Score: ' + score;
+
+                // Increase speed over time
+                let now = Date.now();
+                if (now - lastIncreaseTime > speedIncreaseInterval) {
+                    lastIncreaseTime = now;
+                    speed = Math.max(50, speed - 10);
+                    clearInterval(gameInterval);
+                    gameInterval = setInterval(draw, speed);
+                }
+            }
+
+            function collision(x, y) {
+                for (let i = 1; i < snake.length; i++) {
+                    if (x === snake[i].x && y === snake[i].y) return true;
+                }
+                return false;
+            }
+
+            function endGame() {
+                gameRunning = false;
+                alert('Game Over! Your score: ' + score);
+                resetGame();
+            }
+
+            function resetGame() {
+                snake = [{ x: 2 * box, y: 2 * box }];
+                d = '';
+                score = 0;
+                food = generateFood();
+                speed = 300; // Reset initial speed
+                lastIncreaseTime = Date.now();
+                gameRunning = true; // Restart game
+                gameInterval = setInterval(draw, speed); // Restart the game
+            }
+
+            gameInterval = setInterval(draw, speed); // Start the game
+        </script>
     </div>
-
-    <div id="overlay" class="overlay"></div>
-</main>
-    <script src="script.js"></script>
 </body>
 
 </html>

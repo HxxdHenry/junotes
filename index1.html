@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JU</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8484619872919631"
+     crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header>
+        <img src="uni_logo.png"
+            alt="University Logo" class="header-image">
+        <h1>JU</h1>
+    </header>
+
+    <main>
+        <button id="menu-button" class="header-button">Show Options</button>
+        <a href="https://jecrc.mastersofterp.in/" id="erp-button" class="header-button">ERP</a>
+        <a href="out_of_service.html" id="request-button" class="header-button">
+            <span class="line-one">Request Content</span>
+        </a>
+        <a href="out_of_service.html" id="request-button" class="header-button">
+            <span class="line-one">Suggestions</span>
+        </a>
+
+
+    <div id="menu-content" class="menu-content">
+        <div id="menu-stream" class="menu-step show">
+            <h2>Stream</h2>
+            <select id="stream" class="menu-select">
+                <option value="">Select Stream</option>
+                <option value="btech-cse">BTech CSE</option>
+            </select>
+        </div>
+        <div id="menu-year" class="menu-step">
+            <h2>Year</h2>
+            <select id="year" class="menu-select">
+                <option value="">Select Year</option>
+                <option value="1">1st Year</option>
+            </select>
+        </div>
+        <div id="menu-section" class="menu-step">
+            <h2>Section</h2>
+            <select id="section" class="menu-select">
+                <option value="">Select Section</option>
+                <option value="M">M</option>
+                <!-- Add more sections if needed -->
+            </select>
+        </div>
+        <div id="menu-subject" class="menu-step">
+            <h2>Subject</h2>
+            <select id="subject" class="menu-select">
+                <!-- Options will be populated based on the stream and year -->
+            </select>
+        </div>
+        <div id="menu-type" class="menu-step">
+            <h2>Type</h2>
+            <select id="type" class="menu-select">
+                <!-- Options will be populated based on the subject -->
+            </select>
+        </div>
+        <button class="nav-button previous">Previous</button>
+        <button class="nav-button next">Next</button>
+        <button id="submit-button" class="submit-button">Submit</button>
+    </div>
+
+    <div id="overlay" class="overlay"></div>
+</main>
+    <script src="script.js"></script>
+</body>
+
+</html>
