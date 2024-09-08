@@ -31,12 +31,12 @@ document.addEventListener("DOMContentLoaded", () => {
   // Define types available for each subject
   const subjectOptions = {
     "DEN001A Communication Skills": ["notes", "assignments"],
-    "DEN001B Communication Skills Lab": ["activity"],
+    "DEN001B Communication Skills Lab": ["activities"],
     "DMA001A Engineering Mathematics-I": ["notes", "assignments"],
     "DCO001A Computer Programming and Logical Thinking": ["notes"],
     "DCO014A Computer Programming and Logical Thinking Lab": [],
     "DCH002A Engineering Chemistry": ["notes", "assignments", "books"],
-    "DCH003A Chemistry Lab": ["Lab Manual", "Observations"],
+    "DCH003A Chemistry Lab": ["lab manuals", "observations"],
     "JIC001A Entrepreneurship Development-I": [],
     "DCH004A Environmental Sciences": ["notes", "assignments"],
     "DIN001A Cultural Education-I": [],
