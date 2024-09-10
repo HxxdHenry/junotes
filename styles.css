@@ -9,36 +9,27 @@ body {
 header {
     position: relative;
     height: 80px;
-    /* Set height for the header */
     padding: 0 20px;
     display: flex;
     align-items: center;
     border-bottom: none;
-    /* Remove bottom border */
     overflow: hidden;
-    /* Ensure no overflow of the background */
     background: transparent;
-    /* Ensure header background is transparent */
 }
 
 header .header-image {
     max-height: 60px;
-    /* Control maximum height of logo */
     max-width: 100%;
-    /* Ensure logo doesn't exceed container width */
     position: absolute;
     left: 20px;
-    /* Align logo to the left */
     top: 50%;
     transform: translateY(-50%);
     z-index: 1;
-    /* Ensure logo is on top */
 }
 
 header h1 {
     margin: 0;
     font-size: 36px;
-    /* Maintain original font size */
     color: white;
     text-align: center;
     flex: 1;
@@ -53,7 +44,6 @@ main {
 
 .header-button {
     background-color: #007bff;
-    /* Primary blue color */
     color: white;
     border: none;
     padding: 10px 20px;
@@ -62,15 +52,37 @@ main {
     border-radius: 4px;
     text-decoration: none;
     display: block;
-    margin: 10px auto;
-    width: 300px;
+    width: 300px; /* Width for consistency */
     box-sizing: border-box;
     text-align: center;
+    margin: 10px auto; /* Center button and add vertical margin */
 }
 
 .header-button:hover {
     background-color: #0056b3;
-    /* Darker blue for hover effect */
+}
+
+.button-group {
+    display: flex;
+    justify-content: center; /* Center the button group */
+    gap: 10px; /* Space between the buttons */
+    margin: 20px auto; /* Center and add vertical margin */
+    width: 300px; /* Same width as ERP button */
+}
+
+.button-group-item {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 0; /* Adjust padding to make buttons consistent */
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    text-decoration: none;
+    text-align: center;
+    flex: 1; /* Ensure buttons stretch to fit container */
+    box-sizing: border-box;
+    width: 100%; /* Full width within container */
 }
 
 .menu-content {
@@ -107,7 +119,6 @@ main {
 
 .nav-button {
     background-color: #28a745;
-    /* Green color */
     color: white;
     border: none;
     padding: 10px 20px;
@@ -119,12 +130,10 @@ main {
 
 .nav-button:hover {
     background-color: #218838;
-    /* Darker green for hover effect */
 }
 
 .submit-button {
     background-color: #17a2b8;
-    /* Teal color */
     color: white;
     padding: 10px 20px;
     font-size: 16px;
@@ -137,7 +146,6 @@ main {
 
 .submit-button:hover {
     background-color: #138496;
-    /* Darker teal for hover effect */
 }
 
 .overlay {
@@ -174,48 +182,41 @@ main {
 @media (max-width: 768px) {
     header {
         height: auto;
-        /* Adjust height for smaller screens */
         padding: 10px;
-        /* Adjust padding */
     }
 
     header .header-image {
         max-height: 50px;
-        /* Adjust logo size for smaller screens */
         left: 10px;
-        /* Adjust logo position */
     }
 
     header h1 {
         font-size: 28px;
-        /* Adjust font size for smaller screens */
     }
 
     .header-button {
         width: 70%;
-        /* Adjust button width */
     }
 
-    .menu-content {
-        width: 90%;
-        max-width: none;
-        /* Remove max-width constraint */
+    .button-group {
+        width: 90%; /* Adjust for smaller screens */
     }
 }
 
 @media (max-width: 480px) {
     header .header-image {
         max-height: 40px;
-        /* Further adjust logo size for very small screens */
     }
 
     header h1 {
         font-size: 24px;
-        /* Further adjust font size for very small screens */
     }
 
     .header-button {
         width: 70%;
-        /* Full width buttons on very small screens */
+    }
+
+    .button-group {
+        width: 100%; /* Full width on very small screens */
     }
 }
