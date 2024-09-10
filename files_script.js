@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
     async function fetchAndPopulateDropdown() {
         const { stream, year, section, subject, type } = getQueryParams();
         const jsonUrl = `${stream}/${year}/${section}/${subject}/${type}/${type}.json`;
-        
+
         console.log('Fetching JSON from:', jsonUrl);  // Debugging line
         
         try {
