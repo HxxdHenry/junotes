@@ -69,10 +69,10 @@ main {
 
 .button-group {
     display: flex;
+    flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
     justify-content: center; /* Center the button group */
     gap: 10px; /* Space between the buttons */
-    margin-left: auto;
-    margin-right: auto;
+    margin: 20px auto; /* Center and add vertical margin */
     width: 300px; /* Same width as ERP button */
 }
 
@@ -80,15 +80,31 @@ main {
     background-color: #007bff;
     color: white;
     border: none;
-    padding: 10px 0; /* Adjust padding to make buttons consistent */
+    padding: 10px 20px; /* Adjust padding to make buttons consistent */
     font-size: 16px;
     cursor: pointer;
     border-radius: 4px;
     text-decoration: none;
     text-align: center;
-    flex: 1; /* Ensure buttons stretch to fit container */
     box-sizing: border-box;
     width: 100%; /* Full width within container */
+}
+
+/* Adjust margins for the button group on mobile screens */
+@media (max-width: 768px) {
+    .button-group {
+        width: 90%; /* Adjust for smaller screens */
+    }
+
+    .button-group-item {
+        width: calc(50% - 10px); /* Adjust button width to fit two buttons in a row with gap */
+    }
+}
+
+@media (max-width: 480px) {
+    .button-group-item {
+        width: 100%; /* Full width on very small screens */
+    }
 }
 
 .menu-content {
@@ -207,6 +223,10 @@ main {
     .button-group {
         width: 90%; /* Adjust for smaller screens */
     }
+
+    .button-group-item {
+        width: calc(50% - 10px); /* Adjust button width to fit two buttons in a row with gap */
+    }
 }
 
 @media (max-width: 480px) {
@@ -223,6 +243,10 @@ main {
     }
 
     .button-group {
+        width: 100%; /* Full width on very small screens */
+    }
+
+    .button-group-item {
         width: 100%; /* Full width on very small screens */
     }
 }
