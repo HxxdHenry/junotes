@@ -192,7 +192,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (stream && year && section && subject && type) {
         // Construct the URL based on the selected options
-        const url = `resources.html?stream=${stream}&year=${year}&section=${section}&subject=${encodeURIComponent(subject)}&type=${encodeURIComponent(type)}`;
+        const url = `files.html?stream=${stream}&year=${year}&section=${section}&subject=${encodeURIComponent(subject)}&type=${encodeURIComponent(type)}`;
         window.location.href = url;
       } else {
         alert("Please select all options.");
