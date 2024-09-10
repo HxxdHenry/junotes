@@ -62,6 +62,11 @@ main {
     background-color: #0056b3;
 }
 
+/* Adjust margins for better spacing */
+#erp-button {
+    margin-bottom: 0px; /* Reduce bottom margin for "ERP" button */
+}
+
 .button-group {
     display: flex;
     justify-content: center; /* Center the button group */
