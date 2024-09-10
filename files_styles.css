@@ -6,14 +6,11 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
-    /* Light background color for contrast */
     color: #333;
-    /* Dark text color for readability */
 }
 
 h1 {
     background-color: #007bff;
-    /* Primary color for header background */
     color: white;
     padding: 15px;
     margin: 0;
@@ -22,20 +19,18 @@ h1 {
 
 label {
     font-weight: bold;
-    margin: 10px 0;
+    margin: 20px 0; /* Increased margin from 10px to 20px */
     display: block;
 }
 
 select {
     font-size: 16px;
-    padding: 10px;
-    margin: 10px 0;
+    padding: 12px; /* Increased padding from 10px to 12px */
+    margin: 0 0 20px 0; /* Adjusted margin to have space below */
     border: 1px solid #ccc;
     border-radius: 4px;
     width: 100%;
-    /* Full-width dropdown */
     max-width: 400px;
-    /* Limit width */
     box-sizing: border-box;
     background-color: #fff;
 }
@@ -48,10 +43,8 @@ iframe {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-left: auto;
     margin-right: auto;
-    /* Light shadow for depth */
 }
 
-/* Container for centering content */
 .container {
     max-width: 1200px;
     margin: 0 auto;
