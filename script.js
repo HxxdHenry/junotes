@@ -65,7 +65,8 @@ document.addEventListener("DOMContentLoaded", () => {
         .classList.toggle("show", step === currentStep);
     });
 
-    previousButton.style.display = currentStep === "stream" ? "none" : "inline-block";
+    previousButton.style.display =
+      currentStep === "stream" ? "none" : "inline-block";
     nextButton.textContent = currentStep === "type" ? "Submit" : "Next";
 
     // Only update relevant dropdowns
@@ -78,13 +79,37 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // Update year options based on selected stream
+  function updateYearOptions() {
+    const stream = document.getElementById("stream").value;
+    const yearSelect = document.getElementById("year");
+
+    // Clear existing options
+    yearSelect.innerHTML = '<option value="">Select Year</option>';
+
+    if (stream && streamOptions[stream]) {
+      const years = Object.keys(streamOptions[stream]);
+      years.forEach((year) => {
+        const option = document.createElement("option");
+        option.value = year;
+        option.textContent = `Year ${year}`;
+        yearSelect.appendChild(option);
+      });
+    } else {
+      console.log("No years available.");
+    }
+
+    // Update sections if there are years available
+    if (yearSelect.children.length > 1) {
+      updateSectionOptions();
+    }
+  }
+
   // Update section options based on selected stream and year
   function updateSectionOptions() {
     const stream = document.getElementById("stream").value;
     const year = document.getElementById("year").value;
     const sectionSelect = document.getElementById("section");
-
-    console.log(`Updating sections for: {stream: '${stream}', year: '${year}'}`);
 
     // Clear existing options
     sectionSelect.innerHTML = '<option value="">Select Section</option>';
@@ -101,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log("No sections available.");
     }
 
-    // Call updateSubjectOptions only if the section dropdown has been populated
+    // Update subjects if there are sections available
     if (sectionSelect.children.length > 1) {
       updateSubjectOptions();
     }
@@ -114,8 +139,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const section = document.getElementById("section").value;
     const subjectSelect = document.getElementById("subject");
 
-    console.log(`Updating subjects for: {stream: '${stream}', year: '${year}', section: '${section}'}`);
-
     // Clear existing options
     subjectSelect.innerHTML = '<option value="">Select Subject</option>';
 
@@ -124,14 +147,14 @@ document.addEventListener("DOMContentLoaded", () => {
       subjects.forEach((subject) => {
         const option = document.createElement("option");
         option.value = subject;
-        option.textContent = subject.charAt(0).toUpperCase() + subject.slice(1);
+        option.textContent = subject;
         subjectSelect.appendChild(option);
       });
     } else {
       console.log("No subjects available.");
     }
 
-    // Call updateTypeOptions only if the subject dropdown has been populated
+    // Update types if there are subjects available
     if (subjectSelect.children.length > 1) {
       updateTypeOptions();
     }
@@ -142,8 +165,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const subject = document.getElementById("subject").value;
     const typeSelect = document.getElementById("type");
 
-    console.log(`Updating types for subject: '${subject}'`);
-
     // Clear existing options
     typeSelect.innerHTML = '<option value="">Select Type</option>';
 
@@ -152,7 +173,7 @@ document.addEventListener("DOMContentLoaded", () => {
       types.forEach((type) => {
         const option = document.createElement("option");
         option.value = type;
-        option.textContent = type.charAt(0).toUpperCase() + type.slice(1);
+        option.textContent = type;
         typeSelect.appendChild(option);
       });
     } else {
@@ -170,8 +191,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const type = document.getElementById("type").value;
 
       if (stream && year && section && subject && type) {
-        // Redirect to resources.html with query parameters
-        const url = `resources.html?stream=${encodeURIComponent(stream)}&year=${encodeURIComponent(year)}&section=${encodeURIComponent(section)}&subject=${encodeURIComponent(subject)}&type=${encodeURIComponent(type)}`;
+        // Construct the URL based on the selected options
+        const url = `resources.html?stream=${stream}&year=${year}&section=${section}&subject=${encodeURIComponent(subject)}&type=${encodeURIComponent(type)}`;
         window.location.href = url;
       } else {
         alert("Please select all options.");
@@ -198,7 +219,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Event listeners for dropdown changes
   document.getElementById("stream").addEventListener("change", () => {
     if (currentStep === "stream") {
-      updateMenu();
+      updateYearOptions();
     }
   });
 

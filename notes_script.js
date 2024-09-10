@@ -1,82 +1,49 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Function to get query parameters from the URL
+  const notesDropdown = document.getElementById('notesDropdown');
+  const fileViewer = document.getElementById('fileViewer');
+
+  // Function to get query parameters
   function getQueryParams() {
-    const queryParams = {};
-    const queryString = window.location.search.substring(1);
-    const urlParams = new URLSearchParams(queryString);
-
-    urlParams.forEach((value, key) => {
-      queryParams[key] = value;
-    });
-
-    return queryParams;
+      const params = new URLSearchParams(window.location.search);
+      return {
+          stream: params.get('stream'),
+          year: params.get('year'),
+          section: params.get('section'),
+          subject: params.get('subject'),
+          type: params.get('type')
+      };
   }
 
-  // Function to fetch JSON data
-  function fetchJson(url) {
-    return fetch(url)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .catch(error => {
-        console.error('Error fetching JSON:', error);
-        alert('Failed to load data. Please check the URL or try again later.');
-      });
-  }
+  // Function to fetch JSON data and populate the dropdown
+  async function fetchAndPopulateDropdown() {
+      const { stream, year, section, subject, type } = getQueryParams();
+      const jsonUrl = `${stream}/${year}/${section}/${subject}/${type}/${type}.json`;
 
-  // Function to populate the dropdown with notes
-  function populateDropdown(files) {
-    const notesDropdown = document.getElementById("notesDropdown");
+      try {
+          const response = await fetch(jsonUrl);
+          if (!response.ok) throw new Error('Network response was not ok');
+          const data = await response.json();
 
-    // Clear existing options
-    notesDropdown.innerHTML = '<option value="">--Select a File--</option>';
-
-    files.forEach(file => {
-      const option = document.createElement("option");
-      option.value = file.url;
-      option.textContent = file.name;
-      notesDropdown.appendChild(option);
-    });
-  }
-
-  // Function to handle dropdown change event
-  function handleDropdownChange() {
-    const notesDropdown = document.getElementById("notesDropdown");
-    const fileViewer = document.getElementById("fileViewer");
-
-    notesDropdown.addEventListener("change", () => {
-      const fileUrl = notesDropdown.value;
-
-      if (fileUrl) {
-        fileViewer.style.display = "block";
-        fileViewer.src = fileUrl;
-      } else {
-        fileViewer.style.display = "none";
+          // Populate dropdown
+          notesDropdown.innerHTML = '<option value="">--Select a File--</option>'; // Clear previous options
+          data.forEach(file => {
+              const option = document.createElement('option');
+              option.value = file.url;
+              option.textContent = file.name;
+              notesDropdown.appendChild(option);
+          });
+      } catch (error) {
+          console.error('Error fetching JSON:', error);
       }
-    });
   }
 
-  // Main function to initialize page
-  function initializePage() {
-    const queryParams = getQueryParams();
-    const { stream, year, section, subject, type } = queryParams;
+  // Handle file selection and display
+  notesDropdown.addEventListener('change', () => {
+      const selectedUrl = notesDropdown.value;
+      fileViewer.src = selectedUrl;
+      fileViewer.style.display = selectedUrl ? 'block' : 'none';
+  });
 
-    if (stream && year && section && subject && type) {
-      const jsonFileUrl = `stream/${year}/${section}/${subject}/${type}/${type}.json`; // Adjust path as needed
-
-      fetchJson(jsonFileUrl).then(files => {
-        if (files) {
-          populateDropdown(files);
-          handleDropdownChange();
-        }
-      });
-    } else {
-      console.error("Missing query parameters.");
-    }
-  }
-
-  initializePage();
+  // Fetch and populate dropdown on page load
+  fetchAndPopulateDropdown();
 });
