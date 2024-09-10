@@ -51,11 +51,18 @@
         }
 
         .iframe-container iframe {
-            width: 100%;
+            width: 100%; /* Default width */
             height: 100%;
             border: 5px solid #F7E02E; /* Yellow border color */
             border-radius: 15px; /* Rounded corners */
             border: none;
+        }
+
+        /* Media Query for Desktop Users */
+        @media (min-width: 768px) {
+            .iframe-container iframe {
+                width: 50%; /* Reduce width by 25% for desktop users */
+            }
         }
     </style>
 </head>
