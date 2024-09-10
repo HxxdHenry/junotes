@@ -65,8 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .classList.toggle("show", step === currentStep);
     });
 
-    previousButton.style.display =
-      currentStep === "stream" ? "none" : "inline-block";
+    previousButton.style.display = currentStep === "stream" ? "none" : "inline-block";
     nextButton.textContent = currentStep === "type" ? "Submit" : "Next";
 
     // Only update relevant dropdowns
@@ -85,19 +84,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const year = document.getElementById("year").value;
     const sectionSelect = document.getElementById("section");
 
-    console.log(
-      `Updating sections for: {stream: '${stream}', year: '${year}'}`
-    );
+    console.log(`Updating sections for: {stream: '${stream}', year: '${year}'}`);
 
     // Clear existing options
     sectionSelect.innerHTML = '<option value="">Select Section</option>';
 
-    if (
-      stream &&
-      year &&
-      streamOptions[stream] &&
-      streamOptions[stream][year]
-    ) {
+    if (stream && year && streamOptions[stream] && streamOptions[stream][year]) {
       const sections = Object.keys(streamOptions[stream][year]);
       sections.forEach((section) => {
         const option = document.createElement("option");
@@ -122,21 +114,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const section = document.getElementById("section").value;
     const subjectSelect = document.getElementById("subject");
 
-    console.log(
-      `Updating subjects for: {stream: '${stream}', year: '${year}', section: '${section}'}`
-    );
+    console.log(`Updating subjects for: {stream: '${stream}', year: '${year}', section: '${section}'}`);
 
     // Clear existing options
     subjectSelect.innerHTML = '<option value="">Select Subject</option>';
 
-    if (
-      stream &&
-      year &&
-      section &&
-      streamOptions[stream] &&
-      streamOptions[stream][year] &&
-      streamOptions[stream][year][section]
-    ) {
+    if (stream && year && section && streamOptions[stream] && streamOptions[stream][year] && streamOptions[stream][year][section]) {
       const subjects = streamOptions[stream][year][section];
       subjects.forEach((subject) => {
         const option = document.createElement("option");
@@ -187,8 +170,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const type = document.getElementById("type").value;
 
       if (stream && year && section && subject && type) {
-        // Construct the URL based on the selected options
-        const url = `${stream}/${year}/${section}/${subject}/${type}/${type}.html`; // Ensure this matches your folder structure
+        // Redirect to resources.html with query parameters
+        const url = `resources.html?stream=${encodeURIComponent(stream)}&year=${encodeURIComponent(year)}&section=${encodeURIComponent(section)}&subject=${encodeURIComponent(subject)}&type=${encodeURIComponent(type)}`;
         window.location.href = url;
       } else {
         alert("Please select all options.");
