@@ -2,8 +2,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const notesDropdown = document.getElementById('notesDropdown');
     const fileViewer = document.getElementById('fileViewer');
     const pageHeader = document.getElementById('pageHeader');
-
-    // Function to get query parameters from the URL
+  
+    // Function to get query parameters
     function getQueryParams() {
         const params = new URLSearchParams(window.location.search);
         return {
@@ -14,38 +14,41 @@ document.addEventListener("DOMContentLoaded", () => {
             type: params.get('type')
         };
     }
-
+  
     // Function to capitalize the first letter of a string
     function capitalizeFirstLetter(string) {
         if (string.length === 0) return string;
         return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
     }
-
+  
     // Function to set the page title and header
     function updateTitleAndHeader() {
         const { type } = getQueryParams();
         if (type) {
             const formattedType = capitalizeFirstLetter(decodeURIComponent(type.replace(/-/g, ' ')));
+            // Set the page title to only the type with the first letter capitalized
             document.title = formattedType;
+            
+            // Set the page header to "View and Download [Type]"
             pageHeader.textContent = `View and Download ${formattedType}`;
         }
     }
-
+  
     // Function to fetch JSON data and populate the dropdown
     async function fetchAndPopulateDropdown() {
         const { stream, year, section, subject, type } = getQueryParams();
         const jsonUrl = `${stream}/${year}/${section}/${subject}/${type}/${type}.json`;
-
-        console.log('Fetching JSON from:', jsonUrl);
-
+  
+        console.log(`Fetching JSON from: ${jsonUrl}`);
+  
         try {
             const response = await fetch(jsonUrl);
             if (!response.ok) throw new Error('Network response was not ok');
             const data = await response.json();
-
+  
             console.log('JSON Data:', data);
-
-            // Clear existing options
+  
+            // Populate dropdown
             notesDropdown.innerHTML = '<option value="">--Select a File--</option>';
             data.forEach(file => {
                 const option = document.createElement('option');
@@ -57,30 +60,33 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error('Error fetching JSON:', error);
         }
     }
-
-    // Function to handle file selection and display
+  
+    // Handle file selection and display
     function displaySelectedFile() {
         const selectedUrl = notesDropdown.value;
         console.log('Selected URL:', selectedUrl);
 
         if (selectedUrl) {
-            const fileUrl = encodeURI(selectedUrl);
-            console.log('Encoded File URL:', fileUrl);
+            // Encode the URL for safe use
+            const encodedUrl = encodeURI(selectedUrl);
+            console.log('Encoded File URL:', encodedUrl);
 
-            fileViewer.src = fileUrl;
-
+            fileViewer.src = encodedUrl;
+            fileViewer.style.display = 'block';
+            
             // Log iframe source and display status
             console.log('Iframe source set to:', fileViewer.src);
-            fileViewer.style.display = 'block';
         } else {
             fileViewer.style.display = 'none';
         }
     }
-
-    // Event listener for dropdown change
-    notesDropdown.addEventListener('change', displaySelectedFile);
-
-    // Initialize the page
+  
+    // Fetch and populate dropdown on page load
     fetchAndPopulateDropdown();
+    
+    // Update the title and header based on query parameters
     updateTitleAndHeader();
+  
+    // Event listener for file selection
+    notesDropdown.addEventListener('change', displaySelectedFile);
 });
