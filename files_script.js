@@ -64,7 +64,13 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log('Selected URL:', selectedUrl);
 
         if (selectedUrl) {
-            fileViewer.src = encodeURI(selectedUrl);  // Ensure URL encoding
+            const fileUrl = encodeURI(selectedUrl);
+            console.log('Encoded File URL:', fileUrl);
+
+            fileViewer.src = fileUrl;
+
+            // Log iframe source and display status
+            console.log('Iframe source set to:', fileViewer.src);
             fileViewer.style.display = 'block';
         } else {
             fileViewer.style.display = 'none';
