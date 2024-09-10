@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const { type } = getQueryParams();
         if (type) {
             const formattedType = capitalizeFirstLetter(decodeURIComponent(type.replace(/-/g, ' ')));
+            
             // Set the page title to only the type with the first letter capitalized
             document.title = formattedType;
             
@@ -52,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
             notesDropdown.innerHTML = '<option value="">--Select a File--</option>';
             data.forEach(file => {
                 const option = document.createElement('option');
-                option.value = file.url;
+                option.value = `${stream}/${year}/${section}/${subject}/${type}/${file.url}`;
                 option.textContent = file.name;
                 notesDropdown.appendChild(option);
             });
@@ -62,31 +63,21 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   
     // Handle file selection and display
-    function displaySelectedFile() {
+    notesDropdown.addEventListener('change', () => {
         const selectedUrl = notesDropdown.value;
-        console.log('Selected URL:', selectedUrl);
-
         if (selectedUrl) {
-            // Encode the URL for safe use
+            // Ensure the URL is properly encoded
             const encodedUrl = encodeURI(selectedUrl);
-            console.log('Encoded File URL:', encodedUrl);
-
             fileViewer.src = encodedUrl;
             fileViewer.style.display = 'block';
-            
-            // Log iframe source and display status
-            console.log('Iframe source set to:', fileViewer.src);
         } else {
             fileViewer.style.display = 'none';
         }
-    }
+    });
   
     // Fetch and populate dropdown on page load
     fetchAndPopulateDropdown();
     
     // Update the title and header based on query parameters
     updateTitleAndHeader();
-  
-    // Event listener for file selection
-    notesDropdown.addEventListener('change', displaySelectedFile);
 });
