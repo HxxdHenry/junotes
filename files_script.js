@@ -38,14 +38,14 @@ document.addEventListener("DOMContentLoaded", () => {
         const { stream, year, section, subject, type } = getQueryParams();
         const jsonUrl = `${stream}/${year}/${section}/${subject}/${type}/${type}.json`;
 
-        console.log('Fetching JSON from:', jsonUrl);  // Debugging line
+        console.log('Constructed JSON URL:', jsonUrl);  // Debugging line
         
         try {
             const response = await fetch(jsonUrl);
             if (!response.ok) throw new Error('Network response was not ok');
             const data = await response.json();
             
-            console.log('JSON Data:', data);  // Debugging line
+            console.log('Fetched JSON Data:', data);  // Debugging line
 
             // Populate dropdown
             notesDropdown.innerHTML = '<option value="">--Select a File--</option>'; // Clear previous options
@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Handle file selection and display
     notesDropdown.addEventListener('change', () => {
         const selectedUrl = notesDropdown.value;
-        console.log('Selected URL:', selectedUrl);  // Debugging line
+        console.log('Selected File URL:', selectedUrl);  // Debugging line
         fileViewer.src = selectedUrl;
         fileViewer.style.display = selectedUrl ? 'block' : 'none';
     });
