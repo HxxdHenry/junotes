@@ -25,19 +25,30 @@ h1 {
     text-align: center;
 }
 
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+label, select {
+    margin-left: 20px; // Add margin to push away from left boundary
+    margin-right: 20px; // Ensure some space on the right side as well
+}
+
 label {
     font-weight: bold;
-    margin: 20px 0; // Increased margin from 10px to 20px
+    margin-top: 20px; // Ensure space above the label
     display: block;
 }
 
 select {
     font-size: 16px;
-    padding: 12px; // Increased padding from 10px to 12px
-    margin: 0 0 20px 0; // Adjusted margin to have space below
+    padding: 12px;
+    margin-bottom: 20px; // Space below the dropdown
     border: 1px solid $dropdown-border-color;
     border-radius: $dropdown-border-radius;
-    width: 100%;
+    width: calc(100% - 40px); // Full width minus margins
     max-width: 400px;
     box-sizing: border-box;
     background-color: #fff;
@@ -51,10 +62,4 @@ select {
     box-shadow: $box-shadow;
     margin-left: auto;
     margin-right: auto;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
 }
