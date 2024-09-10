@@ -95,8 +95,6 @@ document.addEventListener("DOMContentLoaded", () => {
         option.textContent = `Year ${year}`;
         yearSelect.appendChild(option);
       });
-    } else {
-      console.log("No years available.");
     }
 
     // Update sections if there are years available
@@ -122,8 +120,6 @@ document.addEventListener("DOMContentLoaded", () => {
         option.textContent = section;
         sectionSelect.appendChild(option);
       });
-    } else {
-      console.log("No sections available.");
     }
 
     // Update subjects if there are sections available
@@ -150,8 +146,6 @@ document.addEventListener("DOMContentLoaded", () => {
         option.textContent = subject;
         subjectSelect.appendChild(option);
       });
-    } else {
-      console.log("No subjects available.");
     }
 
     // Update types if there are subjects available
@@ -176,8 +170,6 @@ document.addEventListener("DOMContentLoaded", () => {
         option.textContent = type;
         typeSelect.appendChild(option);
       });
-    } else {
-      console.log("No types available.");
     }
   }
 
