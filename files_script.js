@@ -23,14 +23,11 @@ document.addEventListener("DOMContentLoaded", () => {
   
     // Function to set the page title and header
     function updateTitleAndHeader() {
-        const { subject, type } = getQueryParams();
+        const { type } = getQueryParams();
         if (type) {
             const formattedType = capitalizeFirstLetter(decodeURIComponent(type.replace(/-/g, ' ')));
-            const formattedSubject = subject ? decodeURIComponent(subject.replace(/-/g, ' ')) : '';
-  
             // Set the page title to only the type with the first letter capitalized
             document.title = formattedType;
-            
             // Set the page header to "View and Download [Type]"
             pageHeader.textContent = `View and Download ${formattedType}`;
         }
@@ -40,15 +37,20 @@ document.addEventListener("DOMContentLoaded", () => {
     async function fetchAndPopulateDropdown() {
         const { stream, year, section, subject, type } = getQueryParams();
         const jsonUrl = `${stream}/${year}/${section}/${subject}/${type}/${type}.json`;
-  
+        
+        console.log('Fetching JSON from:', jsonUrl);  // Debugging line
+        
         try {
             const response = await fetch(jsonUrl);
             if (!response.ok) throw new Error('Network response was not ok');
             const data = await response.json();
-  
+            
+            console.log('JSON Data:', data);  // Debugging line
+
             // Populate dropdown
             notesDropdown.innerHTML = '<option value="">--Select a File--</option>'; // Clear previous options
             data.forEach(file => {
+                console.log('File URL:', file.url);  // Debugging line
                 const option = document.createElement('option');
                 option.value = file.url;
                 option.textContent = file.name;
@@ -62,6 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Handle file selection and display
     notesDropdown.addEventListener('change', () => {
         const selectedUrl = notesDropdown.value;
+        console.log('Selected URL:', selectedUrl);  // Debugging line
         fileViewer.src = selectedUrl;
         fileViewer.style.display = selectedUrl ? 'block' : 'none';
     });
@@ -71,5 +74,4 @@ document.addEventListener("DOMContentLoaded", () => {
     
     // Update the title and header based on query parameters
     updateTitleAndHeader();
-  });
-  
+});
