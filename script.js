@@ -122,12 +122,14 @@ document.addEventListener("DOMContentLoaded", () => {
       currentStep === "stream" ? "none" : "inline-block";
     nextButton.textContent = currentStep === "type" ? "Submit" : "Next";
 
-    // Only update relevant dropdowns
+    // Update dropdown options based on the current step
     if (currentStep === "year") {
-      updateSectionOptions();
+      updateYearOptions();
     } else if (currentStep === "section") {
-      updateSubjectOptions();
+      updateSectionOptions();
     } else if (currentStep === "subject") {
+      updateSubjectOptions();
+    } else if (currentStep === "type") {
       updateTypeOptions();
     }
   }
@@ -148,11 +150,11 @@ document.addEventListener("DOMContentLoaded", () => {
         option.textContent = `Year ${year}`;
         yearSelect.appendChild(option);
       });
-    }
 
-    // Update sections if there are years available
-    if (yearSelect.children.length > 1) {
-      updateSectionOptions();
+      // Trigger update for sections if there are years available
+      if (years.length > 0) {
+        updateSectionOptions();
+      }
     }
   }
 
@@ -173,11 +175,11 @@ document.addEventListener("DOMContentLoaded", () => {
         option.textContent = section;
         sectionSelect.appendChild(option);
       });
-    }
 
-    // Update subjects if there are sections available
-    if (sectionSelect.children.length > 1) {
-      updateSubjectOptions();
+      // Trigger update for subjects if there are sections available
+      if (sections.length > 0) {
+        updateSubjectOptions();
+      }
     }
   }
 
@@ -199,11 +201,11 @@ document.addEventListener("DOMContentLoaded", () => {
         option.textContent = subject;
         subjectSelect.appendChild(option);
       });
-    }
 
-    // Update types if there are subjects available
-    if (subjectSelect.children.length > 1) {
-      updateTypeOptions();
+      // Trigger update for types if there are subjects available
+      if (subjects.length > 0) {
+        updateTypeOptions();
+      }
     }
   }
 
@@ -227,23 +229,59 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Handle form submission
-  nextButton.addEventListener("click", () => {
-    const steps = ["stream", "year", "section", "subject", "type"];
-    const currentIndex = steps.indexOf(currentStep);
-    if (currentIndex < steps.length - 1) {
-      currentStep = steps[currentIndex + 1];
-      updateMenu();
+  function handleFormSubmission() {
+    const stream = document.getElementById("stream").value;
+    const year = document.getElementById("year").value;
+    const section = document.getElementById("section").value;
+    const subject = document.getElementById("subject").value;
+    const type = document.getElementById("type").value;
+
+    // Construct the URL with query parameters
+    if (stream && year && section && subject && type) {
+      const url = `Files/files.html?stream=${encodeURIComponent(stream)}&year=${encodeURIComponent(year)}&section=${encodeURIComponent(section)}&subject=${encodeURIComponent(subject)}&type=${encodeURIComponent(type)}`;
+      window.location.href = url;
     } else {
-      // Handle form submission
-      console.log("Form submitted");
+      alert("Please complete all fields before submitting.");
     }
+  }
+
+  // Handle navigation buttons
+  previousButton.addEventListener("click", () => {
+    switch (currentStep) {
+      case "year":
+        currentStep = "stream";
+        break;
+      case "section":
+        currentStep = "year";
+        break;
+      case "subject":
+        currentStep = "section";
+        break;
+      case "type":
+        currentStep = "subject";
+        break;
+    }
+    updateMenu();
   });
 
-  previousButton.addEventListener("click", () => {
-    const steps = ["stream", "year", "section", "subject", "type"];
-    const currentIndex = steps.indexOf(currentStep);
-    if (currentIndex > 0) {
-      currentStep = steps[currentIndex - 1];
+  nextButton.addEventListener("click", () => {
+    if (currentStep === "type") {
+      handleFormSubmission();
+    } else {
+      switch (currentStep) {
+        case "stream":
+          currentStep = "year";
+          break;
+        case "year":
+          currentStep = "section";
+          break;
+        case "section":
+          currentStep = "subject";
+          break;
+        case "subject":
+          currentStep = "type";
+          break;
+      }
       updateMenu();
     }
   });
