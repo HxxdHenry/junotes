@@ -66,6 +66,9 @@ main {
 #erp-button {
     margin-bottom: 0px; /* Reduce bottom margin for "ERP" button */
 }
+#contribute-button {
+    margin-top: 0px; /* Reduce bottom margin for "ERP" button */
+}
 
 .button-group {
     display: flex;
