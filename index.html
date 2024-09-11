@@ -9,6 +9,40 @@
     <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
     <link rel="manifest" href="favicon/site.webmanifest">
+    <script>
+        // Function to detect ad blocker
+        function detectAdBlocker() {
+            const adBlockerTestElement = document.createElement('div');
+            adBlockerTestElement.className = 'adsbox';
+            document.body.appendChild(adBlockerTestElement);
+
+            setTimeout(() => {
+                if (adBlockerTestElement.offsetHeight === 0) {
+                    window.location.href = 'error.html'; // Redirect to error page
+                }
+                document.body.removeChild(adBlockerTestElement);
+            }, 100);
+        }
+
+        // Function to check if necessary elements are loaded
+        function checkElements() {
+            const requiredElements = [
+                document.querySelector('img.header-image'),
+                document.querySelector('h1'),
+                document.querySelector('#menu-button'),
+                document.querySelector('#overlay')
+            ];
+
+            if (requiredElements.some(el => el === null)) {
+                window.location.href = 'error.html'; // Redirect to error page
+            }
+        }
+
+        window.onload = function() {
+            detectAdBlocker();
+            checkElements();
+        };
+    </script>
 </head>
 <body>
     <header>
