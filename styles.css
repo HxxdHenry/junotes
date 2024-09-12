@@ -67,7 +67,7 @@ main {
     margin-bottom: 0px; /* Reduce bottom margin for "ERP" button */
 }
 #contribute-button {
-    margin-top: 0px; /* Reduce bottom margin for "ERP" button */
+    margin-top: 0px; /* Reduce top margin for "Contribute" button */
 }
 
 .button-group {
@@ -164,37 +164,6 @@ main {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    z-index: 999;
-}
-
-.viewer {
-    margin-top: 20px;
-}
-
-.viewer img,
-.viewer iframe {
-    max-width: 100%;
-    height: auto;
-}
-
-.viewer iframe {
-    width: 100%;
-    height: 500px;
-}
-
-.menu-step #menu-section {
-    display: block;
-}
-
-/* Overlay styles */
-.overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
     background-color: rgba(0, 0, 0, 0.9); /* Darker background */
     z-index: 999;
 }
@@ -240,6 +209,34 @@ main {
     background-color: #0056b3;
 }
 
+/* Footer Styles */
+footer {
+    background-color: rgba(0, 0, 0, 0.7); /* Slightly darker overlay */
+    color: white;
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.3);
+    z-index: 1000; /* Ensure footer is above other content */
+}
+
+.footer-text {
+    font-size: 10px; /* Smaller text size */
+    color: white;
+    margin: 0;
+}
+
+.footer-text a {
+    color: #ddd; /* Less prominent color */
+    text-decoration: none;
+}
+
+.footer-text a:hover {
+    color: #bbb; /* Subtle color change on hover */
+    text-decoration: underline;
+}
 
 /* Media Queries for Responsive Design */
 @media (max-width: 768px) {
@@ -264,6 +261,10 @@ main {
     .button-group {
         width: 90%; /* Adjust for smaller screens */
     }
+
+    .footer-text {
+        font-size: 8px; /* Even smaller text size on smaller screens */
+    }
 }
 
 @media (max-width: 480px) {
@@ -281,5 +282,9 @@ main {
 
     .button-group {
         width: 70%; /* Full width on very small screens */
+    }
+
+    .footer-text {
+        font-size: 7px; /* Smallest text size on very small screens */
     }
 }
