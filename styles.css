@@ -209,6 +209,18 @@ main {
     background-color: #0056b3;
 }
 
+/* Popup link styling */
+.popup-link {
+    color: inherit; /* Inherit color from surrounding text or set a specific color */
+    text-decoration: none; /* Remove underline */
+}
+
+.popup-link:hover {
+    text-decoration: underline; /* Optional: Add underline on hover */
+}
+
+
+
 /* Footer Styles */
 footer {
     background-color: rgba(0, 0, 0, 0.7); /* Slightly darker overlay */
