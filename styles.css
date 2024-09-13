@@ -1,302 +1,301 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background: url('uni_bg.jpeg') no-repeat center center fixed;
-    background-size: cover;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: url("uni_bg.jpeg") no-repeat center center fixed;
+  background-size: cover;
 }
 
 header {
-    position: relative;
-    height: 80px;
-    padding: 0 20px;
-    display: flex;
-    align-items: center;
-    border-bottom: none;
-    overflow: hidden;
-    background: transparent;
+  position: relative;
+  height: 80px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  border-bottom: none;
+  overflow: hidden;
+  background: transparent;
 }
 
 header .header-image {
-    max-height: 60px;
-    max-width: 100%;
-    position: absolute;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 1;
+  max-height: 60px;
+  max-width: 100%;
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
 }
 
 header h1 {
-    margin: 0;
-    font-size: 36px;
-    color: white;
-    text-align: center;
-    flex: 1;
-    z-index: 1;
-    text-shadow: 1px 1px 2px black, -1px -1px 2px black, 1px -1px 2px black, -1px 1px 2px black;
+  margin: 0;
+  font-size: 36px;
+  color: white;
+  text-align: center;
+  flex: 1;
+  z-index: 1;
+  text-shadow: 1px 1px 2px black, -1px -1px 2px black, 1px -1px 2px black,
+    -1px 1px 2px black;
 }
 
 main {
-    text-align: center;
-    margin-top: 20px;
+  text-align: center;
+  margin-top: 20px;
 }
 
 .header-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 4px;
-    text-decoration: none;
-    display: block;
-    width: 300px; /* Width for consistency */
-    box-sizing: border-box;
-    text-align: center;
-    margin: 10px auto; /* Center button and add vertical margin */
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  text-decoration: none;
+  display: block;
+  width: 300px; /* Width for consistency */
+  box-sizing: border-box;
+  text-align: center;
+  margin: 10px auto; /* Center button and add vertical margin */
 }
 
 .header-button:hover {
-    background-color: #0056b3;
+  background-color: #0056b3;
 }
 
 /* Adjust margins for better spacing */
 #erp-button {
-    margin-bottom: 0px; /* Reduce bottom margin for "ERP" button */
+  margin-bottom: 0px; /* Reduce bottom margin for "ERP" button */
 }
 #contribute-button {
-    margin-top: 0px; /* Reduce top margin for "Contribute" button */
+  margin-top: 0px; /* Reduce top margin for "Contribute" button */
 }
 
 .button-group {
-    display: flex;
-    justify-content: center; /* Center the button group */
-    gap: 10px; /* Space between the buttons */
-    margin-left: auto;
-    margin-right: auto;
-    width: 300px; /* Same width as ERP button */
+  display: flex;
+  justify-content: center; /* Center the button group */
+  gap: 10px; /* Space between the buttons */
+  margin-left: auto;
+  margin-right: auto;
+  width: 300px; /* Same width as ERP button */
 }
 
 .button-group-item {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 0; /* Adjust padding to make buttons consistent */
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 4px;
-    text-decoration: none;
-    text-align: center;
-    flex: 1; /* Ensure buttons stretch to fit container */
-    box-sizing: border-box;
-    width: 100%; /* Full width within container */
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 0; /* Adjust padding to make buttons consistent */
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  text-decoration: none;
+  text-align: center;
+  flex: 1; /* Ensure buttons stretch to fit container */
+  box-sizing: border-box;
+  width: 100%; /* Full width within container */
 }
 
 .menu-content {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
-    padding: 20px;
-    z-index: 1000;
-    width: 80%;
-    max-width: 600px;
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  padding: 20px;
+  z-index: 1000;
+  width: 80%;
+  max-width: 600px;
 }
 
 .menu-step {
-    display: none;
+  display: none;
 }
 
 .menu-step.show {
-    display: block;
+  display: block;
 }
 
 .menu-select {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box;
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
 
 .nav-button {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 4px;
-    margin: 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin: 10px;
 }
 
 .nav-button:hover {
-    background-color: #218838;
+  background-color: #218838;
 }
 
 .submit-button {
-    background-color: #17a2b8;
-    color: white;
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-    border-radius: 4px;
-    margin-top: 10px;
-    display: none;
+  background-color: #17a2b8;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-top: 10px;
+  display: none;
 }
 
 .submit-button:hover {
-    background-color: #138496;
+  background-color: #138496;
 }
 
 .overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.9); /* Darker background */
-    z-index: 999;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9); /* Darker background */
+  z-index: 999;
 }
 
 /* Popup styles */
 .popup {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-    border-radius: 8px;
-    padding: 20px;
-    z-index: 1000;
-    width: 80%;
-    max-width: 600px;
-    text-align: center;
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  padding: 20px;
+  z-index: 1000;
+  width: 80%;
+  max-width: 600px;
+  text-align: center;
 }
 
 .popup-show {
-    display: block;
+  display: block;
 }
 
 .popup label {
-    display: block;
-    margin: 10px 0;
+  display: block;
+  margin: 10px 0;
 }
 
 .popup button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 4px;
-    margin-top: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-top: 10px;
 }
 
 .popup button:hover {
-    background-color: #0056b3;
+  background-color: #0056b3;
 }
 
 /* Popup link styling */
 .popup-link {
-    color: inherit; /* Inherit color from surrounding text or set a specific color */
-    text-decoration: none; /* Remove underline */
+  color: inherit; /* Inherit color from surrounding text or set a specific color */
+  text-decoration: none; /* Remove underline */
 }
 
 .popup-link:hover {
-    text-decoration: underline; /* Optional: Add underline on hover */
+  text-decoration: underline; /* Optional: Add underline on hover */
 }
-
-
 
 /* Footer Styles */
 footer {
-    background-color: rgba(0, 0, 0, 0.7); /* Slightly darker overlay */
-    color: white;
-    padding: 10px;
-    text-align: center;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.3);
-    z-index: 1000; /* Ensure footer is above other content */
+  background-color: rgba(0, 0, 0, 0.7); /* Slightly darker overlay */
+  color: white;
+  padding: 10px;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.3);
+  z-index: 1000; /* Ensure footer is above other content */
 }
 
 .footer-text {
-    font-size: 10px; /* Smaller text size */
-    color: white;
-    margin: 0;
+  font-size: 10px; /* Smaller text size */
+  color: white;
+  margin: 0;
 }
 
 .footer-text a {
-    color: #ddd; /* Less prominent color */
-    text-decoration: none;
+  color: #ddd; /* Less prominent color */
+  text-decoration: none;
 }
 
 .footer-text a:hover {
-    color: #bbb; /* Subtle color change on hover */
-    text-decoration: underline;
+  color: #bbb; /* Subtle color change on hover */
+  text-decoration: underline;
 }
 
 /* Media Queries for Responsive Design */
 @media (max-width: 768px) {
-    header {
-        height: auto;
-        padding: 10px;
-    }
+  header {
+    height: auto;
+    padding: 10px;
+  }
 
-    header .header-image {
-        max-height: 50px;
-        left: 10px;
-    }
+  header .header-image {
+    max-height: 50px;
+    left: 10px;
+  }
 
-    header h1 {
-        font-size: 28px;
-    }
+  header h1 {
+    font-size: 28px;
+  }
 
-    .header-button {
-        width: 70%;
-    }
+  .header-button {
+    width: 70%;
+  }
 
-    .button-group {
-        width: 90%; /* Adjust for smaller screens */
-    }
+  .button-group {
+    width: 90%; /* Adjust for smaller screens */
+  }
 
-    .footer-text {
-        font-size: 8px; /* Even smaller text size on smaller screens */
-    }
+  .footer-text {
+    font-size: 8px; /* Even smaller text size on smaller screens */
+  }
 }
 
 @media (max-width: 480px) {
-    header .header-image {
-        max-height: 40px;
-    }
+  header .header-image {
+    max-height: 40px;
+  }
 
-    header h1 {
-        font-size: 24px;
-    }
+  header h1 {
+    font-size: 24px;
+  }
 
-    .header-button {
-        width: 70%;
-    }
+  .header-button {
+    width: 70%;
+  }
 
-    .button-group {
-        width: 70%; /* Full width on very small screens */
-    }
+  .button-group {
+    width: 70%; /* Full width on very small screens */
+  }
 
-    .footer-text {
-        font-size: 7px; /* Smallest text size on very small screens */
-    }
+  .footer-text {
+    font-size: 7px; /* Smallest text size on very small screens */
+  }
 }
